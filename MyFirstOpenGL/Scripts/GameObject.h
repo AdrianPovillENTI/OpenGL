@@ -10,3 +10,7 @@ class GameObject {
 	glm::vec3 scale = glm::vec3(1.f);
 
 };
+
+class GameObject
+{
+};
