@@ -7,7 +7,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
-#include "GameObject.h"
+#include "Scripts/GameObject.h"
 
 #define WINDOW_WIDTH 640
 #define WINDOW_HEIGHT 480

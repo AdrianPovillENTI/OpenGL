@@ -19,6 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scripts\FigureFactory.cpp" />
+    <ClCompile Include="Models\Cube.cpp" />
+    <ClCompile Include="Models\Orthoedro.cpp" />
+    <ClCompile Include="Models\Pyramid.cpp" />
+    <ClCompile Include="Scripts\MatrixGenerator.cpp" />
     <ClCompile Include="Scripts\Figure.cpp" />
     <ClCompile Include="Scripts\Game.cpp" />
     <ClCompile Include="Scripts\GameObject.cpp" />
@@ -37,6 +42,11 @@
     <None Include="MyFirstVertexShader.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scripts\FigureFactory.h" />
+    <ClInclude Include="Models\Cube.h" />
+    <ClInclude Include="Models\Orthoedro.h" />
+    <ClInclude Include="Models\Pyramid.h" />
+    <ClInclude Include="Scripts\MatrixGenerator.h" />
     <ClInclude Include="Scripts\Figure.h" />
     <ClInclude Include="Scripts\Game.h" />
     <ClInclude Include="Scripts\GameObject.h" />

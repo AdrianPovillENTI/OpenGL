@@ -1,16 +1,26 @@
 #pragma once
-#include <glm.hpp>
-#include <gtc/type_ptr.hpp>
-#include <gtc/matrix_transform.hpp>
-
-class GameObject {
-
-	glm::vec3 position = glm::vec3(0.f);
-	glm::vec3 rotation = glm::vec3(0.f);
-	glm::vec3 scale = glm::vec3(1.f);
-
-};
+#include "Transform.h"
+#include "Figure.h"
+#include "MatrixGenerator.h"
 
 class GameObject
 {
+protected:
+    Transform transform;
+    MatrixGenerator matrixGen;
+    Figure * figure;
+    bool active;
+
+public:
+    GameObject ( );
+    virtual ~GameObject ( ) = default;
+
+    virtual void Start ( ) { }
+    virtual void Update ( float dt ) { }
+
+    Transform & GetTransform ( );
+    bool IsActive ( ) const;
+    void SetActive ( bool state );
+
+    glm::mat4 GetModelMatrix ( );
 };
