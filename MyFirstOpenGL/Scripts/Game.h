@@ -1,14 +1,21 @@
 #pragma once
 #include "GameObject.h"
 #include "ShaderProgram.h"
-#include <iostream>
-#include <cstdio>
 #include <vector>
-using namespace std;
 
 class Game
 {
-    vector<GameObject> gameObjects;
-    vector<ShaderProgram> shaderPrograms;
-};
+private:
+    std::vector<GameObject *> gameObjects;
+    std::vector<ShaderProgram> shaderPrograms;
 
+public:
+    Game ( );
+    ~Game ( );
+
+    void Start ( );
+    void Update ( float dt );
+    void Render ( );
+
+    void AddObject ( GameObject * obj );
+};

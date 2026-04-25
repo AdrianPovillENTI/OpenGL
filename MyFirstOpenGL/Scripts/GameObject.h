@@ -8,8 +8,9 @@ class GameObject
 protected:
     Transform transform;
     MatrixGenerator matrixGen;
-    Figure * figure;
     bool active;
+public:
+    Figure * figure;
 
 public:
     GameObject ( );
