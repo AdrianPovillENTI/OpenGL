@@ -9,6 +9,8 @@ protected:
     Transform transform;
     MatrixGenerator matrixGen;
     bool active;
+    float rotationSpeed;
+    float angle;
 public:
     Figure * figure;
 
@@ -18,10 +20,12 @@ public:
 
     virtual void Start ( ) { }
     virtual void Update ( float dt ) { }
+    virtual void Draw ( GLuint program ) { }
 
     Transform & GetTransform ( );
     bool IsActive ( ) const;
     void SetActive ( bool state );
 
-    glm::mat4 GetModelMatrix ( );
+    void CreateModelMatrix()
+
 };

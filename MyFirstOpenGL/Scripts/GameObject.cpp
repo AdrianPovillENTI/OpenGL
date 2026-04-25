@@ -24,7 +24,7 @@ void GameObject::SetActive ( bool state )
     active = state;
 }
 
-glm::mat4 GameObject::GetModelMatrix ( )
+void GameObject::CreateModelMatrix ( )
 {
     glm::mat4 model = glm::mat4 ( 1.0f );
 
@@ -37,5 +37,5 @@ glm::mat4 GameObject::GetModelMatrix ( )
 
     model *= matrixGen.GenerateScaleMatrix ( transform.scale );
 
-    return model;
+    figure->model = model;
 }
