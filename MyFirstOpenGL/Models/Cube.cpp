@@ -6,7 +6,7 @@ Cube::Cube ( )
 {
     angle = 0.0f;
     rotationSpeed = 0.1f;
-    transform.position = glm::vec3 ( -1.5f , 0.0f , 0.0f );
+    transform.position = glm::vec3 ( -0.5f , 0.0f , 0.0f );
     transform.scale = glm::vec3 ( 1.0f );
     figure = nullptr;
 }

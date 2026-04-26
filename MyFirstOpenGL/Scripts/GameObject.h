@@ -2,6 +2,7 @@
 #include "Transform.h"
 #include "Figure.h"
 #include "MatrixGenerator.h"
+#include "../managers/GLManager.h"
 
 class GameObject
 {

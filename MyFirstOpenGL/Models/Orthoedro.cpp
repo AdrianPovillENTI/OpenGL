@@ -22,9 +22,9 @@ void Orthoedro::Update ( float dt )
     // pero si funciona tal cual descomentalo -> float s = abs ( sin ( t ) ); 
     // PD: aplicale el scaleSpeed y sí o sí tienes que usar el generateScaleMatrix
 
-    if (transform.scale.y <= 1.0f) // si la escala es la natural (la de un cubo) la velocidad de escalado serà positiva
+    if (transform.scale.y <= 0.5f) // si la escala es la natural (la de un cubo) la velocidad de escalado serà positiva
         scaleSpeed = abs(scaleSpeed);
-    else if (transform.scale.y >= 1.5f) // si la escala es la del ortoedro inicial (1.5) la velocidad se vuelve negativa
+    else if (transform.scale.y >= 1.0f) // si la escala es la del ortoedro inicial (1.5) la velocidad se vuelve negativa
         scaleSpeed *= -1;
 
     transform.scale = glm::vec3 ( 1.0f, 1.0f + scaleSpeed * dt, 1.0f);
@@ -39,8 +39,8 @@ void Orthoedro::Update ( float dt )
 
 void Orthoedro::Draw(GLuint program)
 {
-    glUniform1f(glGetUniformLocation(program, "windowHeight"), 0 /* Poner aquí el screen height */ );
-    glUniform1i(glGetUniformLocation(program, "figureType"), 0); // o 1
+    glUniform1f(glGetUniformLocation(program, "windowHeight"),  GLManager::Instance().GetHeight());
+    glUniform1i(glGetUniformLocation(program, "figureType"), 1); // o 1
     glUniform1f(glGetUniformLocation(program, "time"), 0 /* Poner aquí el tiempo */);
 
     glUniformMatrix4fv(

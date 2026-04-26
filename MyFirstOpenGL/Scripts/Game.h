@@ -18,5 +18,5 @@ public:
     void Update ( float dt );     // lógica del juego (input + animaciones)
     void Render ( );             // dibuja los objetos
 
-    void AddObject ( GameObject * obj ); // añadir objetos manualmente
+    //void AddObject ( GameObject * obj ); // añadir objetos manualmente
 };

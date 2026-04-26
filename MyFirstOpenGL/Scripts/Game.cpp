@@ -20,7 +20,7 @@ void Game::Start ( )
     // Crear objetos
     GameObject * cube = new GameObject ( );
     cube->figure = FigureFactory::CreateCube ( );
-    cube->GetTransform ( ).position.x = -1.5f;
+    cube->GetTransform ( ).position.x = -0.5f;
 
     GameObject * ortho = new GameObject ( );
     ortho->figure = FigureFactory::CreateOrthoedro ( );
@@ -28,7 +28,7 @@ void Game::Start ( )
 
     GameObject * pyramid = new GameObject ( );
     pyramid->figure = FigureFactory::CreatePyramid ( );
-    pyramid->GetTransform ( ).position.x = 1.5f;
+    pyramid->GetTransform ( ).position.x = 0.5f;
 
     gameObjects.push_back ( cube );
     gameObjects.push_back ( ortho );
@@ -59,6 +59,11 @@ void Game::Update ( float dt )
     if ( InputManager::Instance ( ).GetKeyState ( GLFW_KEY_N ) == KEY_DOWN )
         TimeManager::Instance ( ).DecreaseSpeed ( );
 
+    for(int i = 0; i < gameObjects.size(); i++)
+    {
+        gameObjects[0]->Update(TimeManager::Instance().GetDeltaTime());
+    }
+
     // ANIMACIONES
     // CUBE
     gameObjects [ 0 ]->GetTransform ( ).position.y = sin ( time ) * 0.5f;
@@ -67,7 +72,7 @@ void Game::Update ( float dt )
     // ORTHO
     gameObjects [ 1 ]->GetTransform ( ).rotation.z += 50.0f * delta;
     float scale = sin ( time ) + 1.5f;
-    gameObjects [ 1 ]->GetTransform ( ).scale = { scale, scale, scale };
+    gameObjects [ 1 ]->GetTransform ( ).scale = { 1.0, scale, 1.0 };
 
     // PYRAMID
     gameObjects [ 2 ]->GetTransform ( ).position.y = sin ( time ) * 0.5f;
