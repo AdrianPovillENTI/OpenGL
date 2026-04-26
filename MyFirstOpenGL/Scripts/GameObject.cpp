@@ -1,12 +1,13 @@
 #include "GameObject.h"
 
-GameObject::GameObject ( )
+GameObject::GameObject (glm::vec3 _pos, glm::vec3 _scale, glm::vec3 _rotation)
 {
     active = true;
 
-    transform.position = glm::vec3 ( 0.0f );
-    transform.rotation = glm::vec3 ( 0.0f );
-    transform.scale = glm::vec3 ( 1.0f );
+    transform.position = _pos;
+    transform.scale = _scale;
+    transform.rotation = _rotation;
+    rotationSpeed = 1.0f;
 }
 
 Transform & GameObject::GetTransform ( )
@@ -38,4 +39,12 @@ void GameObject::CreateModelMatrix ( )
     model *= matrixGen.GenerateScaleMatrix ( transform.scale );
 
     figure->model = model;
+}
+
+void GameObject::Draw(GLuint program) {
+    CreateModelMatrix();
+
+    glUniform1f(glGetUniformLocation(program, "time"), TimeManager::Instance().GetTime());
+    glUniform1f(glGetUniformLocation(program, "windowHeight"), GLManager::Instance().GetHeight());
+    glUniform1i(glGetUniformLocation(program, "figureType"), 0);
 }

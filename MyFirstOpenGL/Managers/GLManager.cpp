@@ -8,6 +8,7 @@ GLManager::GLManager ( )
     window = nullptr;
     width = 800;
     height = 600;
+    wireframe = false;
 }
 
 GLManager & GLManager::Instance ( )
@@ -61,6 +62,16 @@ bool GLManager::Init ( int w , int h , const char * title )
 void GLManager::Clear ( )
 {
     glClear ( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+}
+
+void GLManager::EnableWireframe()
+{
+    wireframe = !wireframe;
+
+    if (wireframe)
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    else
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
 void GLManager::SwapBuffers ( )

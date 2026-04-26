@@ -1,24 +1,28 @@
-#version 330 core
+#version 440 core
 
-out vec4 FragColor;
-
+uniform float windowHeight;
+uniform int figureType; // Té dos modes, 0 per a fer els pixels de la meitat superior grocs i la resta taronja i 1 per a que canvii cada 2s
 uniform float time;
-uniform int isPyramid;
-uniform vec3 pyramidColor;
 
-void main()
-{
-    // PIRÁMIDE ? usa color dinámico
-    if (isPyramid == 1)
+out vec4 fragColor;
+
+void main() {
+    if (figureType == 0)
     {
-        FragColor = vec4(pyramidColor, 1.0);
+        if (gl_FragCoord.y > windowHeight / 2.0)
+            fragColor = vec4(1.0, 1.0, 0.0, 1.0);
+        else
+            fragColor = vec4(1.0, 0.5, 0.0, 1.0);
     }
     else
     {
-        // CUBO / ORTO ? color por altura en pantalla
-        if (gl_FragCoord.y > 300.0)
-            FragColor = vec4(1.0, 1.0, 0.0, 1.0); // amarillo
+        float t = mod(time, 6.0);// reinicia el temps cada 6s
+
+        if (t < 2.0)
+            fragColor = vec4(1.0, 0.0, 0.0, 1.0);
+        else if (t < 4.0)
+            fragColor = vec4(0.0, 1.0, 0.0, 1.0);
         else
-            FragColor = vec4(1.0, 0.5, 0.0, 1.0); // naranja
+            fragColor = vec4(0.0, 0.0, 1.0, 1.0);
     }
 }

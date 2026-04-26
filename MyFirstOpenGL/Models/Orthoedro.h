@@ -4,7 +4,7 @@
 class Orthoedro : public GameObject
 {
 private:
-    float scaleSpeed = 0.1f;
+    float scaleSpeed;
 public:
     Orthoedro ( );
     void Update ( float dt ) override;

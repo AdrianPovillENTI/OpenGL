@@ -5,6 +5,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "Managers/InputManager.h"
+#include "Managers/TimeManager.h"
 
 int main ( )
 {
@@ -26,7 +27,7 @@ int main ( )
         GLManager::Instance ( ).Clear ( );
 
         // Update (lógica del juego)
-        game.Update ( 0.0f ); // dt ya lo calcula TimeManager
+        game.Update ( TimeManager::Instance().GetDeltaTime() ); 
 
         // Render (dibujar)
         game.Render ( );

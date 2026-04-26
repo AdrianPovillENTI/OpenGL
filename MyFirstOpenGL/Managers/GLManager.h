@@ -10,6 +10,8 @@ private:
     int width;
     int height;
 
+    bool wireframe;
+
     GLManager ( );
 
 public:
@@ -20,6 +22,7 @@ public:
     bool Init ( int w , int h , const char * title );
     void Clear ( ); // limpia pantalla
     void SwapBuffers ( ); // intercambia buffers
+    void EnableWireframe();
 
     bool ShouldClose ( );
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameObject.h"
+#include "../GameController.h"
 #include "ShaderProgram.h"
 #include <vector>
 
@@ -9,6 +10,7 @@ class Game
 private:
     std::vector<GameObject *> gameObjects;   // lista de objetos del juego
     std::vector<ShaderProgram> shaderPrograms; // shaders usados
+    GameController* controller;
 
 public:
     Game ( );

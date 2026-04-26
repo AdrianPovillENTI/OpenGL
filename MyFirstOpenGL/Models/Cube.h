@@ -3,11 +3,11 @@
 class Cube : public GameObject
 {
 private:
-    float angle = 0.0f;
-    float movementSpeed = 0.1f;
-    float rotationSpeed = 0.1f;
+    float movementSpeed;
+    float rotationSpeed;
+
 public:
-    Cube ( );
+    Cube(glm::vec3 _pos);
     void Update ( float dt ) override;
     void Draw(GLuint program) override;
 };

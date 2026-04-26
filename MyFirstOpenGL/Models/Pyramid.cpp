@@ -2,42 +2,37 @@
 #include "../Managers/TimeManager.h"
 #include <cmath>
 
-Pyramid::Pyramid ( )
+Pyramid::Pyramid(glm::vec3 _pos) : GameObject(_pos, glm::vec3(1.0f), glm::vec3(0.0f))
 {
-    angle = 0.0f;
-    rotationSpeed = 0.1f;
-    transform.position = glm::vec3 ( 1.5f , 0.0f , 0.0f );
-    transform.scale = glm::vec3 ( 1.0f );
-    figure = nullptr;
+    figure = FigureFactory::CreatePyramid();
+    movementSpeed = 0.1f;
+    rotationSpeed = 50.0f;
 }
 
 void Pyramid::Update ( float dt )
 {
-    float t = TimeManager::Instance ( ).GetTime ( );
+    if (transform.position.y <= -0.5f || transform.position.y >= 0.5f)
+        movementSpeed *= -1;
 
-    //Movimiento vertical
-    transform.position += glm::vec3(0.0f, movementSpeed * dt, 0.0f);
-    angle += rotationSpeed * dt;
-
-    figure->model = matrixGen.GenerateTranslationMatrix(transform.position);
-    //Rotación en X e Y
-    figure->model = matrixGen.GenerateRotationMatrix(AXIS_Y + AXIS_X, angle);
+    transform.position.y += movementSpeed * dt;
+    transform.rotation.x += rotationSpeed * dt;
+    transform.rotation.y += rotationSpeed * dt;
 }
 
 void Pyramid::Draw(GLuint program)
 {
-    glUniform1f(glGetUniformLocation(program, "windowHeight"), 0 /* Poner aquí el screen height */);
-    glUniform1i(glGetUniformLocation(program, "figureType"), 1); // o 1
-    glUniform1f(glGetUniformLocation(program, "time"), 0 /* Poner aquí el tiempo */);
+    GameObject::Draw(program);
+
+    glUniform1i(glGetUniformLocation(program, "figureType"), 1);
+
 
     glUniformMatrix4fv(
-        glGetUniformLocation(program, "transform"),
+        glGetUniformLocation(program, "model"),
         1,
         GL_FALSE,
         glm::value_ptr(figure->model)
     );
 
-    glBindVertexArray(figure->vao);
-    glDrawArrays(GL_TRIANGLES, 0, sizeof(figure->vertices));
+    figure->Draw();
 }
 

@@ -2,7 +2,9 @@
 #include "Transform.h"
 #include "Figure.h"
 #include "MatrixGenerator.h"
+#include "FigureFactory.h"
 #include "../managers/GLManager.h"
+#include "../managers/TimeManager.h"
 
 class GameObject
 {
@@ -11,18 +13,16 @@ protected:
     MatrixGenerator matrixGen;
     bool active;
     float rotationSpeed;
-    float angle;
 
 public:
     Figure * figure;
 
 public:
-    GameObject ( );
+    GameObject(glm::vec3 _pos, glm::vec3 _scale, glm::vec3 _rotation);
     virtual ~GameObject ( ) = default;
 
-    virtual void Start ( ) { }
     virtual void Update ( float dt ) { }
-    virtual void Draw ( GLuint program ) { }
+    virtual void Draw(GLuint program);
 
     Transform & GetTransform ( );
     bool IsActive ( ) const;
