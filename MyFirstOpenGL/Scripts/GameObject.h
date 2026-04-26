@@ -11,6 +11,7 @@ protected:
     bool active;
     float rotationSpeed;
     float angle;
+
 public:
     Figure * figure;
 
@@ -26,6 +27,5 @@ public:
     bool IsActive ( ) const;
     void SetActive ( bool state );
 
-    void CreateModelMatrix()
-
+    void CreateModelMatrix ( ); 
 };

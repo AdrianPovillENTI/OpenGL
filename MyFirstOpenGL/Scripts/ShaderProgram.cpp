@@ -1,1 +1,60 @@
 #include "ShaderProgram.h"
+#include <fstream>
+#include <sstream>
+#include <iostream>
+
+ShaderProgram::ShaderProgram ( const char * vertexPath , const char * fragmentPath )
+{
+    std::string vertexCode;
+    std::string fragmentCode;
+
+    std::ifstream vShaderFile;
+    std::ifstream fShaderFile;
+
+    vShaderFile.open ( vertexPath );
+    fShaderFile.open ( fragmentPath );
+
+    std::stringstream vStream , fStream;
+
+    vStream << vShaderFile.rdbuf ( );
+    fStream << fShaderFile.rdbuf ( );
+
+    vertexCode = vStream.str ( );
+    fragmentCode = fStream.str ( );
+
+    const char * vCode = vertexCode.c_str ( );
+    const char * fCode = fragmentCode.c_str ( );
+
+    //Crear vertex shader
+    vertexShader = glCreateShader ( GL_VERTEX_SHADER );
+    glShaderSource ( vertexShader , 1 , &vCode , NULL );
+    glCompileShader ( vertexShader );
+
+    //Crear fragment shader
+    fragmentShader = glCreateShader ( GL_FRAGMENT_SHADER );
+    glShaderSource ( fragmentShader , 1 , &fCode , NULL );
+    glCompileShader ( fragmentShader );
+
+    //Crear programa
+    programID = glCreateProgram ( );
+    glAttachShader ( programID , vertexShader );
+    glAttachShader ( programID , fragmentShader );
+    glLinkProgram ( programID );
+
+    //limpiar shaders
+    glDeleteShader ( vertexShader );
+    glDeleteShader ( fragmentShader );
+}
+ShaderProgram::~ShaderProgram ( )
+{
+}
+
+GLuint ShaderProgram::GetID ( )
+{
+    return programID;
+}
+
+void ShaderProgram::Use ( )
+{
+    glUseProgram ( programID );
+}

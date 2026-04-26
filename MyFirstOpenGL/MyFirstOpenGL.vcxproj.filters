@@ -86,6 +86,8 @@
     <None Include="MyFirstFragmentShader.glsl">
       <Filter>Shaders\Fragment Shader</Filter>
     </None>
+    <None Include="Vertex.glsl" />
+    <None Include="Fragment.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Managers\TimeManager.h">

@@ -18,13 +18,19 @@ TimeManager & TimeManager::Instance ( )
 //Se metera en el parametro "glfwGetTime()" para actualizar cada frame
 void TimeManager::Update ( float currentTime )
 {
-    deltaTime = currentTime - lastFrameTime;
+    float rawDelta = currentTime - lastFrameTime;
     lastFrameTime = currentTime;
 
-    if ( !paused )
+    if ( rawDelta > 0.1f )
+        rawDelta = 0.1f;
+
+    if ( paused )
     {
-        time += deltaTime * speed;
+        deltaTime = 0.0f;
+        return;
     }
+    deltaTime = rawDelta * speed;
+    time += deltaTime;
 }
 
 float TimeManager::GetDeltaTime ( ) { return deltaTime; }

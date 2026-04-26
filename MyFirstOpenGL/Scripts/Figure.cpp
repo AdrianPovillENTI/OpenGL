@@ -19,9 +19,8 @@ void Figure::SetupMesh ( )
     glBindBuffer ( GL_ARRAY_BUFFER , 0 );
     glBindVertexArray ( 0 );
 }
-void Figure::Draw ( ShaderProgram& shader )
+void Figure::Draw ( )
 {
-    shader.("transform", model);
     glBindVertexArray ( vao );
     glDrawArrays ( GL_TRIANGLES , 0 , vertices.size ( ) / 3 );
     glBindVertexArray ( 0 );

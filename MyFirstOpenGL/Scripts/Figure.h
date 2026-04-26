@@ -17,5 +17,5 @@ public:
     //Funcion que se encargara de configurar el VAO y VBO de la figura
     void SetupMesh ( );
     //Funcion que se encargara de dibujar la figura
-    void Draw ( ShaderProgram& shader );
+    void Draw ( );
 };

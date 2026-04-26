@@ -37,6 +37,8 @@
     <ClCompile Include="Scripts\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Fragment.glsl" />
+    <None Include="Vertex.glsl" />
     <None Include="MyFirstFragmentShader.glsl" />
     <None Include="MyFirstGeometryShader.glsl" />
     <None Include="MyFirstVertexShader.glsl" />

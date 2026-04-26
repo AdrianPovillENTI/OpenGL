@@ -3,16 +3,18 @@
 
 class ShaderProgram
 {
-    //Para almacenar el ID del programa de shader
-	GLuint programID;
+private:
+    GLuint programID;
 
-	GLuint vertexShader = 0;
-	GLuint geometryShader = 0;
-	GLuint fragmentShader = 0;
+    GLuint vertexShader = 0;
+    GLuint geometryShader = 0;
+    GLuint fragmentShader = 0;
+
 public:
+    ShaderProgram ( const char * vertexPath ,const char * fragmentPath );    
+    ~ShaderProgram ( );
 
-	ShaderProgram ( );
-	~ShaderProgram ( );
-	GLuint GetID ( );
+    GLuint GetID ( );
+
+    void Use ( ); 
 };
-
