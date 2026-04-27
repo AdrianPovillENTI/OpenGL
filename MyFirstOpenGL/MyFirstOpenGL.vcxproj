@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameController.cpp" />
+    <ClCompile Include="Model.cpp" />
     <ClCompile Include="Scripts\FigureFactory.cpp" />
     <ClCompile Include="Models\Cube.cpp" />
     <ClCompile Include="Models\Orthoedro.cpp" />
@@ -46,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameController.h" />
+    <ClInclude Include="Model.h" />
     <ClInclude Include="Scripts\FigureFactory.h" />
     <ClInclude Include="Models\Cube.h" />
     <ClInclude Include="Models\Orthoedro.h" />
