@@ -4,7 +4,7 @@ TimeManager::TimeManager ( )
 {
     deltaTime = 0.0f;
     time = 0.0f;
-    speed = 1.0f;
+    timeScale = 1.0f;
     paused = false;
     lastFrameTime = 0.0f;
 }
@@ -29,26 +29,32 @@ void TimeManager::Update ( float currentTime )
         deltaTime = 0.0f;
         return;
     }
-    deltaTime = rawDelta * speed;
+    deltaTime = rawDelta * timeScale;
     time += deltaTime;
 }
 
 float TimeManager::GetDeltaTime ( ) { return deltaTime; }
 float TimeManager::GetTime ( ) { return time; }
-float TimeManager::GetSpeed ( ) { return speed; }
+float TimeManager::GetSpeed ( ) { return timeScale; }
 bool TimeManager::IsPaused ( ) { return paused; }
 
 void TimeManager::TogglePause ( )
 {
     paused = !paused;
+    if (paused) 
+    {
+        savedTimeScale = timeScale;
+        timeScale = 0;
+    }
+    else timeScale = savedTimeScale;
 }
 
 void TimeManager::IncreaseSpeed ( )
 {
-    speed *= 1.1f;
+    timeScale *= 1.1f;
 }
 
 void TimeManager::DecreaseSpeed ( )
 {
-    speed *= 0.9f;
+    timeScale *= 0.9f;
 }

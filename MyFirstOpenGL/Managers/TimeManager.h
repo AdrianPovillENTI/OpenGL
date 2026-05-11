@@ -5,7 +5,8 @@ class TimeManager
 private:
     float deltaTime;
     float time;
-    float speed;
+    float timeScale;
+    float savedTimeScale;
     bool paused;
 
     float lastFrameTime;
