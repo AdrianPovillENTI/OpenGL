@@ -10,7 +10,7 @@
 int main ( )
 {
     // Inicializar OpenGL y ventana
-    if ( !GLManager::Instance ( ).Init ( 800 , 600 , "OpenGL Practice" ) )
+    if ( !GLManager::Instance ( ).Init ( "OpenGL Practice" ) )
     {
         std::cout << "Error inicializando OpenGL\n";
         return -1;

@@ -63,19 +63,22 @@
     <ClCompile Include="Scripts\MatrixGenerator.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Models\Cube.cpp">
+    <ClCompile Include="GeometryModels\Cube.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Models\Orthoedro.cpp">
+    <ClCompile Include="GeometryModels\Orthoedro.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Models\Pyramid.cpp">
+    <ClCompile Include="GeometryModels\Pyramid.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Scripts\FigureFactory.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="GameController.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Stb.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -126,13 +129,13 @@
     <ClInclude Include="Scripts\MatrixGenerator.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Models\Cube.h">
+    <ClInclude Include="GeometryModels\Cube.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Models\Orthoedro.h">
+    <ClInclude Include="GeometryModels\Orthoedro.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Models\Pyramid.h">
+    <ClInclude Include="GeometryModels\Pyramid.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Scripts\FigureFactory.h">

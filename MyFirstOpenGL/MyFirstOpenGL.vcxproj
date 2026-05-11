@@ -21,9 +21,9 @@
   <ItemGroup>
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="Scripts\FigureFactory.cpp" />
-    <ClCompile Include="Models\Cube.cpp" />
-    <ClCompile Include="Models\Orthoedro.cpp" />
-    <ClCompile Include="Models\Pyramid.cpp" />
+    <ClCompile Include="GeometryModels\Cube.cpp" />
+    <ClCompile Include="GeometryModels\Orthoedro.cpp" />
+    <ClCompile Include="GeometryModels\Pyramid.cpp" />
     <ClCompile Include="Scripts\MatrixGenerator.cpp" />
     <ClCompile Include="Scripts\Figure.cpp" />
     <ClCompile Include="Scripts\Game.cpp" />
@@ -36,6 +36,7 @@
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Managers\TimeManager.cpp" />
     <ClCompile Include="Scripts\Transform.cpp" />
+    <ClCompile Include="Stb.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Fragment.glsl" />
@@ -47,9 +48,9 @@
   <ItemGroup>
     <ClInclude Include="GameController.h" />
     <ClInclude Include="Scripts\FigureFactory.h" />
-    <ClInclude Include="Models\Cube.h" />
-    <ClInclude Include="Models\Orthoedro.h" />
-    <ClInclude Include="Models\Pyramid.h" />
+    <ClInclude Include="GeometryModels\Cube.h" />
+    <ClInclude Include="GeometryModels\Orthoedro.h" />
+    <ClInclude Include="GeometryModels\Pyramid.h" />
     <ClInclude Include="Scripts\MatrixGenerator.h" />
     <ClInclude Include="Scripts\Figure.h" />
     <ClInclude Include="Scripts\Game.h" />
@@ -148,7 +149,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLM\include;$(SolutionDir)Dependencies\GLFW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLM\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\STB\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

@@ -2,8 +2,8 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#define int WIDTH = 800;
-#define int HEIGHT = 600;
+#define WIDTH 800
+#define HEIGHT 600
 
 class GLManager
 {
