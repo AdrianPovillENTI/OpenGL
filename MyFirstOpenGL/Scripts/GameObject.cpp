@@ -45,6 +45,6 @@ void GameObject::Draw(GLuint program) {
     CreateModelMatrix();
 
     glUniform1f(glGetUniformLocation(program, "time"), TimeManager::Instance().GetTime());
-    glUniform1f(glGetUniformLocation(program, "windowHeight"), GLManager::Instance().GetHeight());
+    glUniform1f(glGetUniformLocation(program, "windowHeight"), HEIGHT);
     glUniform1i(glGetUniformLocation(program, "figureType"), 0);
 }

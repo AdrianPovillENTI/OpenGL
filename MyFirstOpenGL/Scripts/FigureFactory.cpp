@@ -1,12 +1,14 @@
-#include "FigureFactory.h"
 
+#include "FigureFactory.h"
+#include <GL/glew.h>
+#include <glm.hpp>
 // Els vértex han estat definits amb ChatGPT
 
 Figure * FigureFactory::CreateCube ( )
 {
-    Figure * f = new Figure ( );
 
-    f->vertices = {
+    std::vector<GLfloat> vertices =
+    {
         // BACK
     -0.15f,  0.15f, -0.15f,   0.15f,  0.15f, -0.15f,  -0.15f, -0.15f, -0.15f,
      0.15f,  0.15f, -0.15f,   0.15f, -0.15f, -0.15f,  -0.15f, -0.15f, -0.15f,
@@ -32,8 +34,12 @@ Figure * FigureFactory::CreateCube ( )
          0.15f, -0.15f, -0.15f,   0.15f, -0.15f,  0.15f,  -0.15f, -0.15f,  0.15f
     };
 
-    f->SetupMesh ( );
-    return f;
+    std::vector<GLfloat> uvs =
+    {
+
+    };
+
+    return new Figure(vertices, uvs);
 }
 
 Figure * FigureFactory::CreateOrthoedro ( )
@@ -43,9 +49,9 @@ Figure * FigureFactory::CreateOrthoedro ( )
 
 Figure * FigureFactory::CreatePyramid ( )
 {
-    Figure * f = new Figure ( );
 
-    f->vertices = {
+    std::vector<GLfloat> vertices =
+    {
         // BASE (quadrat)
     -0.15f, -0.15f, -0.15f,   0.15f, -0.15f, -0.15f,  -0.15f, -0.15f,  0.15f,
      0.15f, -0.15f, -0.15f,   0.15f, -0.15f,  0.15f,  -0.15f, -0.15f,  0.15f,
@@ -63,6 +69,11 @@ Figure * FigureFactory::CreatePyramid ( )
        -0.15f, -0.15f, -0.15f,  -0.15f, -0.15f,  0.15f,   0.0f,   0.2f,   0.0f
     };
 
-    f->SetupMesh ( );
+    std::vector<GLfloat> uvs =
+    {
+
+    };
+
+    Figure* f = new Figure(vertices, uvs);
     return f;
 }

@@ -2,9 +2,9 @@
 #include "../Managers/InputManager.h"
 #include "../Managers/TimeManager.h"
 #include "../Managers/GLManager.h"
-#include "../Models/Cube.h"
-#include "../Models/Pyramid.h"
-#include "../Models/Orthoedro.h"
+#include "../GeometryModels/Cube.h"
+#include "../GeometryModels/Pyramid.h"
+#include "../GeometryModels/Orthoedro.h"
 
 Game::Game ( ) { }
 
