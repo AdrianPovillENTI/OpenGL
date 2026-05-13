@@ -20,7 +20,7 @@ void Game::Start ( )
 {
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     //CREAR SHADER
-    shaderPrograms.push_back ( ShaderProgram ( "vertex.glsl" , "fragment.glsl" ) );
+    shaderPrograms.push_back ( ShaderProgram ( ) );
 
     controller = new GameController();
     // Crear objetos

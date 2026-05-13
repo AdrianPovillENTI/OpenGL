@@ -6,8 +6,6 @@
 GLManager::GLManager ( )
 {
     window = nullptr;
-    width = 800;
-    height = 600;
     wireframe = false;
 }
 
@@ -17,11 +15,8 @@ GLManager & GLManager::Instance ( )
     return instance;
 }
 
-bool GLManager::Init ( int w , int h , const char * title )
+bool GLManager::Init ( const char * title )
 {
-    width = w;
-    height = h;
-
     if ( !glfwInit ( ) )
     {
         std::cout << "Error al iniciar GLFW\n";
@@ -32,7 +27,7 @@ bool GLManager::Init ( int w , int h , const char * title )
     glfwWindowHint ( GLFW_CONTEXT_VERSION_MINOR , 3 );
     glfwWindowHint ( GLFW_OPENGL_CORE_PROFILE , GLFW_OPENGL_CORE_PROFILE );
 
-    window = glfwCreateWindow ( width , height , title , NULL , NULL );
+    window = glfwCreateWindow ( WIDTH , HEIGHT, title , NULL , NULL );
     if ( !window )
     {
         std::cout << "Error al crear ventana\n";
@@ -51,7 +46,7 @@ bool GLManager::Init ( int w , int h , const char * title )
     }
 
     // Ajustar viewport
-    glViewport ( 0 , 0 , width , height );
+    glViewport ( 0 , 0 , WIDTH, HEIGHT);
 
     // Activar profundidad
     glEnable ( GL_DEPTH_TEST );

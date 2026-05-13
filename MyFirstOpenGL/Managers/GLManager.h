@@ -2,13 +2,14 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#define int WIDTH = 800;
+#define int HEIGHT = 600;
+
 class GLManager
 {
 private:
     GLFWwindow * window; // ventana principal
 
-    int width;
-    int height;
 
     bool wireframe;
 
@@ -17,9 +18,7 @@ private:
 public:
     static GLManager & Instance ( );
 
-    int GetWidth() { return width; }
-    int GetHeight() { return height; }
-    bool Init ( int w , int h , const char * title );
+    bool Init ( const char * title );
     void Clear ( ); // limpia pantalla
     void SwapBuffers ( ); // intercambia buffers
     void EnableWireframe();

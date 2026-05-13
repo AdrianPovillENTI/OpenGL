@@ -11,7 +11,7 @@ Cube::Cube (glm::vec3 _pos) : GameObject(_pos, glm::vec3(1.0f), glm::vec3(0.0f))
 
 void Cube::Update ( float dt )
 {
-    if (transform.position.y <= -0.5f || transform.position.y >= 0.5f)
+    if (transform.position.y <= -MOVEMENT_LIMIT || transform.position.y >= MOVEMENT_LIMIT)
         movementSpeed *= -1;
     transform.position += glm::vec3(0.0f, movementSpeed * dt, 0.0f);
 

@@ -94,6 +94,7 @@
     </None>
     <None Include="Vertex.glsl" />
     <None Include="Fragment.glsl" />
+    <None Include="CameraVertexShader.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Managers\TimeManager.h">
