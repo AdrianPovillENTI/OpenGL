@@ -19,52 +19,51 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scripts\ModelObject.cpp" />
+    <ClCompile Include="Scripts\Camera.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Scripts\FigureFactory.cpp" />
     <ClCompile Include="GeometryModels\Cube.cpp" />
-    <ClCompile Include="GeometryModels\Orthoedro.cpp" />
-    <ClCompile Include="GeometryModels\Pyramid.cpp" />
     <ClCompile Include="Scripts\MatrixGenerator.cpp" />
     <ClCompile Include="Scripts\Figure.cpp" />
     <ClCompile Include="Scripts\Game.cpp" />
     <ClCompile Include="Scripts\GameObject.cpp" />
     <ClCompile Include="Managers\GLManager.cpp" />
-    <ClCompile Include="Managers\FileManager.cpp" />
     <ClCompile Include="Managers\InputManager.cpp" />
-    <ClCompile Include="Managers\ShaderManager.cpp" />
     <ClCompile Include="Scripts\ShaderProgram.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Managers\TimeManager.cpp" />
     <ClCompile Include="Scripts\Transform.cpp" />
     <ClCompile Include="Stb.cpp" />
+    <ClCompile Include="Scripts\Textures.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="CameraVertexShader.glsl" />
     <None Include="Fragment.glsl" />
     <None Include="Vertex.glsl" />
-    <None Include="MyFirstFragmentShader.glsl" />
     <None Include="MyFirstGeometryShader.glsl" />
-    <None Include="MyFirstVertexShader.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scripts\ModelObject.h" />
+    <ClInclude Include="Scripts\Camera.h" />
     <ClInclude Include="GameController.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Scripts\FigureFactory.h" />
     <ClInclude Include="GeometryModels\Cube.h" />
-    <ClInclude Include="GeometryModels\Orthoedro.h" />
-    <ClInclude Include="GeometryModels\Pyramid.h" />
     <ClInclude Include="Scripts\MatrixGenerator.h" />
     <ClInclude Include="Scripts\Figure.h" />
     <ClInclude Include="Scripts\Game.h" />
     <ClInclude Include="Scripts\GameObject.h" />
     <ClInclude Include="Managers\GLManager.h" />
-    <ClInclude Include="Managers\FileManager.h" />
     <ClInclude Include="Managers\InputManager.h" />
     <ClInclude Include="Managers\TimeManager.h" />
-    <ClInclude Include="Managers\ShaderManager.h" />
     <ClInclude Include="Scripts\ShaderProgram.h" />
     <ClInclude Include="Scripts\Transform.h" />
+    <ClInclude Include="Scripts\Textures.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Textures\rock.png" />
+    <Image Include="Assets\Textures\troll.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

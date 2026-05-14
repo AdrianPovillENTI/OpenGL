@@ -9,14 +9,15 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-
+#include "Camera.h"
 class Game
 {
 private:
     std::vector<GameObject *> gameObjects;   // lista de objetos del juego
     std::vector<ShaderProgram> shaderPrograms; // shaders usados
     std::vector<Model> models;
-
+    Camera camera;
+    glm::vec3 sceneCenter = glm::vec3 ( 0.0f , 0.0f , 0.0f );
     GameController* controller;
 
 public:
@@ -80,39 +81,41 @@ public:
                 tmpNormals.push_back(tmpVec3.y);
                 tmpNormals.push_back(tmpVec3.z);
 
-            } else if (prefix == "f") { // Si es una cara
+            } 
+            else if (prefix == "f") 
+            { // Si es una cara
                 int vertexData;
                 short counter = 0;
 
                 // Obtenim els valors fins a un espai
-                while (ss >> vertexData)
+                while ( ss >> vertexData )
                 {
                     // En ordre cada num segueix el patró vertex/uv/normal = 3 valors
-                    switch (counter)
+                    switch ( counter )
                     {
-                    case 0:
-                        // Si es un vertex, l'emmagatzemo -1 per l'offset
-                        vertexs.push_back(tmpVertexs[(vertexData - 1) * 3]);
-                        vertexs.push_back(tmpVertexs[(vertexData - 1) * 3 + 1]);
-                        vertexs.push_back(tmpVertexs[(vertexData - 1) * 3 + 2]);
-                        ss.ignore(1, '/'); // Si el char es '/' l'ignora
-                        counter++;
-                        break;
-                    case 1:
-                        // Si es un vertex, l'emmagatzemo -1 per l'offset
-                        textureCoords.push_back(tmpVertexs[(vertexData - 1) * 2]);
-                        textureCoords.push_back(tmpVertexs[(vertexData - 1) * 2 + 1]);
-                        ss.ignore(1, '/'); // Si el char es '/' l'ignora
-                        counter++;
-                        break;
-                    case 2:
-                        // Si es un vertex, l'emmagatzemo -1 per l'offset
-                        vertexNormal.push_back(tmpVertexs[(vertexData - 1) * 3]);
-                        vertexNormal.push_back(tmpVertexs[(vertexData - 1) * 3 + 1]);
-                        vertexNormal.push_back(tmpVertexs[(vertexData - 1) * 3 + 2]);
-                        ss.ignore(1, '/'); // Si el char es '/' l'ignora
-                        counter = 0;
-                        break;
+                        case 0:
+                            // Si es un vertex, l'emmagatzemo -1 per l'offset
+                            vertexs.push_back ( tmpVertexs [ ( vertexData - 1 ) * 3 ] );
+                            vertexs.push_back ( tmpVertexs [ ( vertexData - 1 ) * 3 + 1 ] );
+                            vertexs.push_back ( tmpVertexs [ ( vertexData - 1 ) * 3 + 2 ] );
+                            ss.ignore ( 1 , '/' );
+                            counter++;
+                            break;
+                        case 1:
+                            // Si es un vertex, l'emmagatzemo -1 per l'offset
+                            textureCoords.push_back ( tmpTextures [ ( vertexData - 1 ) * 2 ] );
+                            textureCoords.push_back ( tmpTextures [ ( vertexData - 1 ) * 2 + 1 ] );
+                            ss.ignore ( 1 , '/' );
+                            counter++;
+                            break;
+                        case 2:
+                            // Si es un vertex, l'emmagatzemo -1 per l'offset
+                            vertexNormal.push_back ( tmpNormals [ ( vertexData - 1 ) * 3 ] );
+                            vertexNormal.push_back ( tmpNormals [ ( vertexData - 1 ) * 3 + 1 ] );
+                            vertexNormal.push_back ( tmpNormals [ ( vertexData - 1 ) * 3 + 2 ] );
+                            ss.ignore ( 1 , '/' );// Si el char es '/' l'ignora
+                            counter = 0;
+                            break;
                     }
                 }
             }

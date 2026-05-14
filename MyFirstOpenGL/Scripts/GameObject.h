@@ -15,8 +15,7 @@ protected:
     float rotationSpeed;
 
 public:
-    Figure * figure;
-
+    Figure * figure = nullptr;
 public:
     GameObject(glm::vec3 _pos, glm::vec3 _scale, glm::vec3 _rotation);
     virtual ~GameObject ( ) = default;

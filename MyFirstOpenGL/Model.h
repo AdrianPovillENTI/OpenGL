@@ -1,19 +1,19 @@
-#ifndef MODEL_H
-#define MODEL_H
-
+#pragma once
 #include <vector>
 #include <GL/glew.h>
 
-class Model {
+class Model
+{
+private:
+    GLuint VAO = 0;
+    GLuint VBO = 0;
+    GLuint uvVBO = 0;
+
+    int numVertex = 0;
 
 public:
-	Model(const std::vector<float>& vertex, const std::vector<float>& uvs, const std::vector<float>& normals);
-	void Render() const;
+    Model ( ) = default;
+    Model ( const std::vector<float> & vertex , const std::vector<float> & uvs , const std::vector<float> & normals );
 
-
-private:
-	GLuint VAO, VBO;
-	unsigned int numVertex;
+    void Render ( ) const;
 };
-
-#endif

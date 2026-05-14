@@ -1,28 +1,25 @@
-#version 440 core
+#version 330 core
 
-uniform float windowHeight;
-uniform int figureType; // Té dos modes, 0 per a fer els pixels de la meitat superior grocs i la resta taronja i 1 per a que canvii cada 2s
-uniform float time;
+// Coordenadas UV que vienen del vertex shader.
+// Sirven para saber qué punto de la textura corresponde a este fragmento.
+in vec2 TexCoord;
 
-out vec4 fragColor;
+// Color final que saldrá a pantalla
+out vec4 FragColor;
 
-void main() {
-    if (figureType == 0)
-    {
-        if (gl_FragCoord.y > windowHeight / 2.0)
-            fragColor = vec4(1.0, 1.0, 0.0, 1.0);
-        else
-            fragColor = vec4(1.0, 0.5, 0.0, 1.0);
-    }
-    else
-    {
-        float t = mod(time, 6.0);// reinicia el temps cada 6s
+// Textura principal del modelo.
+// Aquí conectaremos troll.png o rock.png desde C++.
+uniform sampler2D mainTexture;
 
-        if (t < 2.0)
-            fragColor = vec4(1.0, 0.0, 0.0, 1.0);
-        else if (t < 4.0)
-            fragColor = vec4(0.0, 1.0, 0.0, 1.0);
-        else
-            fragColor = vec4(0.0, 0.0, 1.0, 1.0);
-    }
+// Color multiplicador para pintar el modelo.
+uniform vec3 tintColor;
+
+void main()
+{
+    // Leemos el color de la textura en las coordenadas UV actuales
+    vec4 texColor = texture(mainTexture, TexCoord);
+
+    // Multiplicamos el color de la textura por el tinte.
+    // Esto permite reutilizar la misma textura cambiando ligeramente el color.
+    FragColor = texColor * vec4(tintColor, 1.0);
 }

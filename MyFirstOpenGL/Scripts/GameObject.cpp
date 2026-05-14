@@ -41,7 +41,8 @@ void GameObject::CreateModelMatrix ( )
     figure->model = model;
 }
 
-void GameObject::Draw(GLuint program) {
+void GameObject::Draw(GLuint program) 
+{
     CreateModelMatrix();
 
     glUniform1f(glGetUniformLocation(program, "time"), TimeManager::Instance().GetTime());

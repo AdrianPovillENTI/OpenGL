@@ -1,20 +1,20 @@
 #include "Figure.h"
 
-Figure::Figure(const std::vector<float>& vertexs, const std::vector<float>& uvs/*, const std::vector<float>& normals*/)
+Figure::Figure ( const std::vector<float> & vertexs , const std::vector<float> & uvs )
 {
-    for (int i = 0; i < vertexs.size(); i++ ) 
+    vertices = vertexs;
+
+    glGenVertexArrays ( 1 , &vao );
+
+    SetupMesh ( );
+
+    if ( !uvs.empty ( ) )
     {
-        vertices[i] = vertexs[i];
+        SetupUVS ( uvs );
     }
 
-    glGenVertexArrays(1, &vao);
-
-    SetupMesh();
-    SetupUVS(uvs);
-    //SetupNormals(normals);
-    UnlinkGroups();
+    UnlinkGroups ( );
 }
-
 void Figure::SetupMesh ( )
 {
     glBindVertexArray ( vao );
@@ -28,6 +28,7 @@ void Figure::SetupMesh ( )
                    GL_STATIC_DRAW );
 
     glVertexAttribPointer ( 0 , 3 , GL_FLOAT , GL_FALSE , 3 * sizeof ( GLfloat ) , ( void * ) 0 );
+    glEnableVertexAttribArray ( 0 );
 }
 void Figure::SetupUVS(const std::vector<float>& uvs)
 {
@@ -40,7 +41,8 @@ void Figure::SetupUVS(const std::vector<float>& uvs)
     //Definimos los VBOs activos
     glBindBuffer(GL_ARRAY_BUFFER, uvVBO);
     glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(float), uvs.data(), GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray ( 1 );
 
 }
 void Figure::SetupNormals(const std::vector<float> normals)
@@ -48,8 +50,6 @@ void Figure::SetupNormals(const std::vector<float> normals)
 }
 void Figure::UnlinkGroups() 
 {
-    glEnableVertexAttribArray(0);
-
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 }
