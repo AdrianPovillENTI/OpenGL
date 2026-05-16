@@ -16,17 +16,17 @@ Cube::Cube ( glm::vec3 _pos )
 
 void Cube::Update ( float dt )
 {
-    // Movimiento vertical
-    if ( transform.position.y <= -MOVEMENT_LIMIT || transform.position.y >= MOVEMENT_LIMIT )
-    {
-        movementSpeed *= -1;
-    }
+    //// Movimiento vertical
+    //if ( transform.position.y <= -MOVEMENT_LIMIT || transform.position.y >= MOVEMENT_LIMIT )
+    //{
+    //    movementSpeed *= -1;
+    //}
 
-    // Desplazamiento vertical
-    transform.position += glm::vec3 ( 0.0f , movementSpeed * dt , 0.0f );
+    //// Desplazamiento vertical
+    //transform.position += glm::vec3 ( 0.0f , movementSpeed * dt , 0.0f );
 
-    // Rotación en Y
-    transform.rotation.y += rotationSpeed * dt;
+    //// Rotación en Y
+    //transform.rotation.y += rotationSpeed * dt;
 }
 
 void Cube::Draw ( GLuint program )
@@ -42,18 +42,12 @@ void Cube::Draw ( GLuint program )
 
     // Como el shader multiplica textura * tintColor,
     // si usamos textura blanca y tintColor blanco, el resultado será blanco.
-    glUniform3f (
-        glGetUniformLocation ( program , "tintColor" ) ,
-        1.0f , 1.0f , 1.0f
-    );
+    glUniform3f ( glGetUniformLocation ( program , "tintColor" ) , 1.0f , 1.0f , 1.0f );
 
     texture.Bind ( 0 );
 
     // Le decimos al shader que mainTexture debe usar la unidad 0.
-    glUniform1i (
-        glGetUniformLocation ( program , "mainTexture" ) ,
-        0
-    );
+    glUniform1i (  glGetUniformLocation ( program , "mainTexture" ) , 0 );
 
     // Dibujar la figura del cubo
     figure->Draw ( );

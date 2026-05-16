@@ -57,9 +57,6 @@
     <ClCompile Include="Scripts\MatrixGenerator.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Scripts\FigureFactory.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="GameController.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
@@ -79,6 +76,9 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Scripts\Textures.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\FigureFactory.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -117,9 +117,6 @@
     <ClInclude Include="Scripts\MatrixGenerator.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Scripts\FigureFactory.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="GameController.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -136,6 +133,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Scripts\Textures.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\FigureFactory.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

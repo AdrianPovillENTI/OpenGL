@@ -1,5 +1,4 @@
 #include "Model.h"
-#include <iostream>
 
 Model::Model ( const std::vector<float> & vertex , const std::vector<float> & uvs , const std::vector<float> & normals )
 {
@@ -42,3 +41,4 @@ void Model::Render ( ) const
     glDrawArrays ( GL_TRIANGLES , 0 , numVertex );
     glBindVertexArray ( 0 );
 }
+

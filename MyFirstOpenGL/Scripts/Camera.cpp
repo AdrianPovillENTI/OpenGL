@@ -112,9 +112,8 @@ void Camera::ActivateWideShot ( const glm::vec3 & subjectPosition )
     mode = CameraMode::WideShot;
 
     target = subjectPosition + glm::vec3 ( 0.0f , 1.2f , 0.0f );
-    position = target + glm::vec3 ( 0.0f , 2.0f , 6.0f );
+    position = target + glm::vec3 ( 2.0f , 2.0f , 10.0f );
 
-    // FOV amplio para ver bien el cuerpo completo
     fov = 45.0f;
 }
 
@@ -124,9 +123,8 @@ void Camera::ActivateDetailShot ( const glm::vec3 & subjectPosition )
     mode = CameraMode::DetailShot;
 
     target = subjectPosition + glm::vec3 ( 0.0f , 1.3f , 0.0f );
-    position = target + glm::vec3 ( 1.3f , 1.6f , 3.5f );
+    position = target + glm::vec3 ( 1.3f , 1.6f , 4.5f );
 
-    // FOV más cerrado para sensación de detalle
     fov = 25.0f;
 }
 
@@ -137,7 +135,7 @@ void Camera::ActivateDollyZoom ( const glm::vec3 & subjectPosition )
     dollyTarget = subjectPosition + glm::vec3 ( 0.0f , 1.2f , 0.0f );
     target = dollyTarget;
 
-    // Empezamos más lejos con FOV pequeño
+    // Empezamos lejos con FOV pequeño
     dollyStartPos = dollyTarget + glm::vec3 ( 0.0f , 1.0f , 6.0f );
     dollyEndPos = dollyTarget + glm::vec3 ( 0.0f , 1.0f , 2.0f );
 

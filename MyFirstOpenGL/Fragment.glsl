@@ -1,5 +1,5 @@
 #version 330 core
-
+//ESTE CODIGO SE HA HECHO CON LA AYUDA DE CHATGPT
 // Coordenadas UV que vienen del vertex shader.
 // Sirven para saber qué punto de la textura corresponde a este fragmento.
 in vec2 TexCoord;

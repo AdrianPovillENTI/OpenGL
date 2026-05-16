@@ -2,6 +2,7 @@
 
 #include "../Scripts/GameObject.h"
 #include "../Scripts/Textures.h"
+#include "../Scripts/FigureFactory.h"
 #include <glm.hpp>
 
 class Cube : public GameObject

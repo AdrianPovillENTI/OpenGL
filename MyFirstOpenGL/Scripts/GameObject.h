@@ -2,7 +2,6 @@
 #include "Transform.h"
 #include "Figure.h"
 #include "MatrixGenerator.h"
-#include "FigureFactory.h"
 #include "../managers/GLManager.h"
 #include "../managers/TimeManager.h"
 

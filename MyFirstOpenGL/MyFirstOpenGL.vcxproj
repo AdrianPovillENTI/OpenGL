@@ -19,11 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scripts\FigureFactory.cpp" />
     <ClCompile Include="Scripts\ModelObject.cpp" />
     <ClCompile Include="Scripts\Camera.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="Model.cpp" />
-    <ClCompile Include="Scripts\FigureFactory.cpp" />
     <ClCompile Include="GeometryModels\Cube.cpp" />
     <ClCompile Include="Scripts\MatrixGenerator.cpp" />
     <ClCompile Include="Scripts\Figure.cpp" />
@@ -44,11 +44,11 @@
     <None Include="MyFirstGeometryShader.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scripts\FigureFactory.h" />
     <ClInclude Include="Scripts\ModelObject.h" />
     <ClInclude Include="Scripts\Camera.h" />
     <ClInclude Include="GameController.h" />
     <ClInclude Include="Model.h" />
-    <ClInclude Include="Scripts\FigureFactory.h" />
     <ClInclude Include="GeometryModels\Cube.h" />
     <ClInclude Include="Scripts\MatrixGenerator.h" />
     <ClInclude Include="Scripts\Figure.h" />

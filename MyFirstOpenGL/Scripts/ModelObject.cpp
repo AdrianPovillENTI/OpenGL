@@ -1,16 +1,12 @@
 #include "ModelObject.h"
+#include "FigureFactory.h"
 #include <gtc/type_ptr.hpp>
 
-ModelObject::ModelObject (
-    const Model model ,
-    const Textures texture ,
-    glm::vec3 position ,
-    glm::vec3 scale ,
-    glm::vec3 rotation ,
-    glm::vec3 tintColor
-)
-    : GameObject ( position , scale , rotation ) , model ( model ) , texture ( texture ) , tintColor ( tintColor )
+ModelObject::ModelObject ( std::string modelPath, Textures texturePath , glm::vec3 position ,
+                           glm::vec3 scale , glm::vec3 rotation , glm::vec3 tintColor) : 
+    GameObject ( position , scale , rotation ) , model ( model ) , texture ( texturePath ) , tintColor ( tintColor )
 {
+    model = FigureFactory::LoadOBJModel ( modelPath );
 }
 void ModelObject::Draw ( GLuint program )
 {
@@ -33,11 +29,7 @@ void ModelObject::Draw ( GLuint program )
 
 
     // Enviar el color de tinte al fragment shader
-    glUniform3fv (
-        glGetUniformLocation ( program , "tintColor" ) ,
-        1 ,
-        glm::value_ptr ( tintColor )
-    );
+    glUniform3fv ( glGetUniformLocation ( program , "tintColor" ) , 1 , glm::value_ptr ( tintColor ) );
     // Textura en la unidad 0
     texture.Bind ( 0 );
     glUniform1i ( glGetUniformLocation ( program , "mainTexture" ) , 0 );

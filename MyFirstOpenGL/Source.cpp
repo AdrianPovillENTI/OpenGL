@@ -29,7 +29,7 @@ int main ( )
         // Update (lógica del juego)
         game.Update ( TimeManager::Instance().GetDeltaTime() ); 
 
-        // Render (dibujar)
+        // Render 
         game.Render ( );
 
         // Mostrar frame

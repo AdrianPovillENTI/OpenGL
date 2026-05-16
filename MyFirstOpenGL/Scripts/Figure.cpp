@@ -1,7 +1,8 @@
 #include "Figure.h"
 
-Figure::Figure ( const std::vector<float> & vertexs , const std::vector<float> & uvs )
+Figure::Figure ( const std::vector<float> & vertexs)
 {
+    const std::vector<float> & uvs = std::vector<float> ( );
     vertices = vertexs;
 
     glGenVertexArrays ( 1 , &vao );
@@ -22,10 +23,7 @@ void Figure::SetupMesh ( )
     glGenBuffers ( 1 , &vbo );
     glBindBuffer ( GL_ARRAY_BUFFER , vbo );
 
-    glBufferData ( GL_ARRAY_BUFFER ,
-                   vertices.size ( ) * sizeof ( GLfloat ) ,
-                   vertices.data ( ) ,
-                   GL_STATIC_DRAW );
+    glBufferData ( GL_ARRAY_BUFFER , vertices.size ( ) * sizeof ( GLfloat ) , vertices.data ( ) , GL_STATIC_DRAW );
 
     glVertexAttribPointer ( 0 , 3 , GL_FLOAT , GL_FALSE , 3 * sizeof ( GLfloat ) , ( void * ) 0 );
     glEnableVertexAttribArray ( 0 );
@@ -44,9 +42,6 @@ void Figure::SetupUVS(const std::vector<float>& uvs)
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
     glEnableVertexAttribArray ( 1 );
 
-}
-void Figure::SetupNormals(const std::vector<float> normals)
-{
 }
 void Figure::UnlinkGroups() 
 {

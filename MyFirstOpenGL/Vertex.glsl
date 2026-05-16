@@ -1,5 +1,5 @@
 #version 330 core
-
+//ESTE CODIGO SE HA HECHO CON LA AYUDA DE CHATGPT
 // Posición del vértice.
 // Debe coincidir con el atributo 0 para cuando hacemos: glVertexAttribPointer(attrib ...)
 layout (location = 0) in vec3 aPos;

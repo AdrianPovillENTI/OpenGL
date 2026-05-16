@@ -4,6 +4,7 @@
 #include "../Managers/GLManager.h"
 #include "../Scripts/ModelObject.h"
 #include "../GeometryModels/Cube.h"
+#include <iostream>
 
 Game::Game ( ) { }
 
@@ -32,10 +33,6 @@ void Game::Start ( )
     controller = new GameController ( );
 
     // Suelo con cubo
-
-    Model trollModel = LoadOBJModel ( "Assets/troll.obj" );
-    Model rockModel = LoadOBJModel ( "Assets/rock.obj" );
-
     Textures trollTexture ( "Assets/Textures/troll.png" );
     Textures rockTexture ( "Assets/Textures/rock.png" );
 
@@ -43,7 +40,7 @@ void Game::Start ( )
     ground->GetTransform().scale = glm::vec3 ( 25.0f , 0.4f , 25.0f );
 
     ModelObject * trollLeft = new ModelObject (
-        trollModel ,
+        "Assets/troll.obj" ,
         trollTexture ,
         glm::vec3 ( -2.5f , 0.0f , 0.0f ) ,
         glm::vec3 ( 1.0f ) ,
@@ -52,7 +49,7 @@ void Game::Start ( )
     );
 
     ModelObject * trollCenter = new ModelObject (
-        trollModel ,
+        "Assets/troll.obj" ,
         trollTexture ,
         glm::vec3 ( 0.0f , 0.0f , 0.0f ) ,
         glm::vec3 ( 1.0f ) ,
@@ -61,16 +58,16 @@ void Game::Start ( )
     );
 
     ModelObject * trollRight = new ModelObject (
-        trollModel ,
+        "Assets/troll.obj" ,
         trollTexture ,
         glm::vec3 ( 2.5f , 0.0f , 0.0f ) ,
         glm::vec3 ( 1.0f ) ,
         glm::vec3 ( 0.0f ) ,
-        glm::vec3 ( 0.7f , 0.8f , 1.0f )
+        glm::vec3 ( 0.3f , 0.2f , 1.0f )
     );
 
     ModelObject * rock = new ModelObject (
-        rockModel ,
+        "Assets/rock.obj" ,
         rockTexture ,
         glm::vec3 ( 3.5f , 0.0f , 2.5f ) ,
         glm::vec3 ( 1.0f ) ,
@@ -79,7 +76,7 @@ void Game::Start ( )
     );
 
     ModelObject * cloud = new ModelObject (
-        rockModel ,
+        "Assets/rock.obj" ,
         rockTexture ,
         glm::vec3 ( 0.0f , 3.0f , -2.0f ) ,
         glm::vec3 ( 2.5f , 0.8f , 1.5f ) ,
@@ -87,10 +84,10 @@ void Game::Start ( )
         glm::vec3 ( 1.2f , 1.2f , 1.2f )
     );
 
-    gameObjects.push_back ( ground );
     gameObjects.push_back ( trollLeft );
     gameObjects.push_back ( trollCenter );
     gameObjects.push_back ( trollRight );
+    gameObjects.push_back ( ground );
     gameObjects.push_back ( rock );
     gameObjects.push_back ( cloud );
     
