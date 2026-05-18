@@ -5,6 +5,7 @@
 #include "Managers/GLManager.h"
 #include "Scripts/GameObject.h"
 #include "Scripts/Camera.h"
+#include "Scripts/Player.h"
 #include <vector>
 
 class GameController
@@ -18,4 +19,5 @@ private:
     void TimeManageInput ( );
     void ToggleWireframe ( );
     void CameraManageInput ( std::vector<GameObject *> & gameObjects , Camera & camera );
+    void PlayerMove ( Player* player );
 };

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Scripts\Player.cpp" />
     <ClCompile Include="Scripts\FigureFactory.cpp" />
     <ClCompile Include="Scripts\ModelObject.cpp" />
     <ClCompile Include="Scripts\Camera.cpp" />
@@ -44,6 +45,7 @@
     <None Include="MyFirstGeometryShader.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scripts\Player.h" />
     <ClInclude Include="Scripts\FigureFactory.h" />
     <ClInclude Include="Scripts\ModelObject.h" />
     <ClInclude Include="Scripts\Camera.h" />

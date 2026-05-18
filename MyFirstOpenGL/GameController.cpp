@@ -61,3 +61,31 @@ void GameController::CameraManageInput ( std::vector<GameObject *> & gameObjects
         camera.ActivateOrbit ( );
     }
 }
+
+void GameController::PlayerMove(Player* player)
+{
+    //W
+    if (InputManager::Instance().GetKeyState(GLFW_KEY_W) == KEY_DOWN)
+    {
+        //MOVER ADELANTE
+        player->GetTransform().position + glm::vec3(0, 0, 1);
+    }
+    //A
+    if (InputManager::Instance().GetKeyState(GLFW_KEY_A) == KEY_DOWN)
+    {
+        //MOVER IZQUIERDA
+        player->GetTransform().position + glm::vec3(-1, 0, 0);
+    }
+    //S
+    if (InputManager::Instance().GetKeyState(GLFW_KEY_S) == KEY_DOWN)
+    {
+        //MOVER ABAJO
+        player->GetTransform().position + glm::vec3(0, 0, -1);
+    }
+    //D
+    if (InputManager::Instance().GetKeyState(GLFW_KEY_D) == KEY_DOWN)
+    {
+        //MOVER DERECHA
+        player->GetTransform().position + glm::vec3(1, 0, 0);
+    }
+}

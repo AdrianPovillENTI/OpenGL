@@ -12,6 +12,7 @@ Model::Model ( const std::vector<float> & vertex , const std::vector<float> & uv
     // POSICIONES
     glGenBuffers ( 1 , &this->VBO );
     glBindBuffer ( GL_ARRAY_BUFFER , this->VBO );
+    glBindBuffer ( GL_ARRAY_BUFFER , this->normalsVBO );
     glBufferData ( GL_ARRAY_BUFFER , vertex.size ( ) * sizeof ( float ) , vertex.data ( ) , GL_STATIC_DRAW );
 
     // Atributo 0 = posición
@@ -28,6 +29,16 @@ Model::Model ( const std::vector<float> & vertex , const std::vector<float> & uv
         // Atributo 1 = coordenadas de textura
         glVertexAttribPointer ( 1 , 2 , GL_FLOAT , GL_FALSE , 2 * sizeof ( float ) , ( void * ) 0 );
         glEnableVertexAttribArray ( 1 );
+    }
+    if ( !normals.empty ( ) )
+    {
+        glGenBuffers ( 1 , &this->normalsVBO);
+        glBindBuffer ( GL_ARRAY_BUFFER , this->normalsVBO);
+        glBufferData ( GL_ARRAY_BUFFER , normals.size ( ) * sizeof ( float ) , normals.data ( ) , GL_STATIC_DRAW );
+
+        // Atributo 1 = coordenadas de textura
+        glVertexAttribPointer ( 2 , 2 , GL_FLOAT , GL_FALSE , 2 * sizeof ( float ) , ( void * ) 0 );
+        glEnableVertexAttribArray ( 2 );
     }
 
     // Desvincular
