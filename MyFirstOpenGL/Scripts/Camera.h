@@ -18,9 +18,6 @@ private:
     // Posición actual de la cámara
     glm::vec3 position;
 
-    // Punto al que mira
-    glm::vec3 target;
-
     // Vector up
     glm::vec3 up;
 
@@ -88,6 +85,7 @@ public:
     // Update general de cámara
     void Update ( float dt );
 
+    void MoveCameraForward(const glm::vec3& newPosition);
 private:
     // Helpers internos
     void UpdateOrbit ( float dt );

@@ -1,4 +1,5 @@
 #include "GLManager.h"
+#include <glm.hpp>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
@@ -83,4 +84,18 @@ bool GLManager::ShouldClose ( )
 GLFWwindow * GLManager::GetWindow ( )
 {
     return window;
+}
+glm::vec2 GLManager::GetMousePosition()
+{
+    double x;
+    double y;
+
+    //GetMouse position and store in  x & y
+    glfwGetCursorPos(window, &x, &y);
+    if (x < 0) x = 0;
+    else if (x > WIDTH) x = WIDTH;
+    if (y < 0) y = 0;
+    else if (y > HEIGHT) y = HEIGHT;
+
+    return glm::vec3(x,y,0.0);
 }

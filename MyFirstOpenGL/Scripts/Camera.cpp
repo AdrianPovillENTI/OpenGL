@@ -6,7 +6,6 @@
 Camera::Camera ( )
 {
     position = glm::vec3 ( 0.0f , 4.0f , 8.0f );
-    target = glm::vec3 ( 0.0f , 0.0f , 0.0f );
     up = glm::vec3 ( 0.0f , 1.0f , 0.0f );
 
     fov = 45.0f;
@@ -20,7 +19,7 @@ Camera::Camera ( )
     orbitSpeed = 1.0f;
     orbitCenter = glm::vec3 ( 0.0f );
 
-    mode = CameraMode::Orbit;
+    //mode = CameraMode::Orbit;
 
     dollyTimer = 0.0f;
     dollyDuration = 2.0f;
@@ -33,7 +32,8 @@ Camera::Camera ( )
 
 glm::mat4 Camera::GetViewMatrix ( ) const
 {
-    return glm::lookAt ( position , target , up );
+    //Posicion camara, target lockeado, direccion
+    return glm::lookAt(position, position + glm::vec3(0,0,5), up);
 }
 
 glm::mat4 Camera::GetProjectionMatrix ( ) const
@@ -53,7 +53,7 @@ void Camera::SetPosition ( const glm::vec3 & newPosition )
 
 void Camera::SetTarget ( const glm::vec3 & newTarget )
 {
-    target = newTarget;
+    //target = newTarget;
 }
 
 void Camera::SetFOV ( float newFov )
@@ -66,10 +66,6 @@ glm::vec3 Camera::GetPosition ( ) const
     return position;
 }
 
-glm::vec3 Camera::GetTarget ( ) const
-{
-    return target;
-}
 
 float Camera::GetFOV ( ) const
 {
@@ -111,19 +107,20 @@ void Camera::ActivateWideShot ( const glm::vec3 & subjectPosition )
     // Plano general
     mode = CameraMode::WideShot;
 
-    target = subjectPosition + glm::vec3 ( 0.0f , 1.2f , 0.0f );
-    position = target + glm::vec3 ( 2.0f , 2.0f , 10.0f );
+    position = glm::vec3(0, 2, 4.5f);
 
     fov = 45.0f;
 }
-
+void Camera::MoveCameraForward(const glm::vec3& subjectPosition)
+{
+    position = subjectPosition;
+}
 void Camera::ActivateDetailShot ( const glm::vec3 & subjectPosition )
 {
     // Plano detalle
     mode = CameraMode::DetailShot;
 
-    target = subjectPosition + glm::vec3 ( 0.0f , 1.3f , 0.0f );
-    position = target + glm::vec3 ( 1.3f , 1.6f , 4.5f );
+    position = glm::vec3 ( 0 , 2 , 4.5f );
 
     fov = 25.0f;
 }
@@ -133,9 +130,7 @@ void Camera::ActivateDollyZoom ( const glm::vec3 & subjectPosition )
     mode = CameraMode::DollyZoom;
 
     dollyTarget = subjectPosition + glm::vec3 ( 0.0f , 1.2f , 0.0f );
-    target = dollyTarget;
 
-    // Empezamos lejos con FOV pequeño
     dollyStartPos = dollyTarget + glm::vec3 ( 0.0f , 1.0f , 6.0f );
     dollyEndPos = dollyTarget + glm::vec3 ( 0.0f , 1.0f , 2.0f );
 
@@ -178,7 +173,6 @@ void Camera::UpdateOrbit ( float dt )
     position.z = orbitCenter.z + sin ( orbitAngle ) * orbitRadius;
     position.y = orbitCenter.y + orbitHeight;
 
-    target = orbitCenter;
 }
 
 void Camera::UpdateDollyZoom ( float dt )
@@ -190,7 +184,6 @@ void Camera::UpdateDollyZoom ( float dt )
     // Interpolación lineal de posición y FOV
     position = glm::mix ( dollyStartPos , dollyEndPos , t );
     fov = glm::mix ( dollyStartFov , dollyEndFov , t );
-    target = dollyTarget;
 
     // Cuando termina, vuelve a órbita
     if ( t >= 1.0f )

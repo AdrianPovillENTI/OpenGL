@@ -1,3 +1,5 @@
 Durante el desarrollo del proyecto se ha utilizado principalmente documentación oficial, páginas especializadas y recursos externos relacionados con OpenGL para consultar el funcionamiento de determinadas funciones y resolver dudas técnicas puntuales.
 
 Adicionalmente, se ha hecho un uso ocasional de herramientas basadas en LLMs como apoyo complementario para aclaraciones de sintaxis, conceptos y consulta rápida de ejemplos.
+BIBLIOGRAFIA:
+https://phpgl.net/API/GLFW/glfwGetCursorPos.html =>GetMousePosition
