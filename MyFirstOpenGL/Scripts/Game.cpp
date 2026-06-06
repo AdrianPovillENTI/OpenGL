@@ -38,12 +38,12 @@ void Game::Start ( )
     Textures moonTexture ("Assets/Textures/moon.png");
     Textures terrainTexture ("Assets/Textures/Terrain.png");
 
-    ModelObject* terrain = new ModelObject("Assets/Obj/Terrain.obj", terrainTexture, glm::vec3(0.f, -0.5f, 0.f));
+    ModelObject* terrain = new ModelObject("Assets/Terrain.obj", terrainTexture, glm::vec3(0.f, -0.5f, 0.f));
 
     gameObjects.push_back(terrain);
 
-    ModelObject* sun = new ModelObject("Assets/Obj/sun.obj", sunTexture, glm::vec3(0.f, -50.f, 4.f), glm::vec3(2.f), glm::vec3(0.f, 0.f, 45.f));
-    ModelObject* moon = new ModelObject("Assets/Obj/moon.obj", moonTexture, glm::vec3(0.f, 50.f, 4.f), glm::vec3(1.5f), glm::vec3(0.f, 180.f, -45.f));
+    ModelObject* sun = new ModelObject("Assets/sun.obj", sunTexture, glm::vec3(0.f, -50.f, 4.f), glm::vec3(2.f), glm::vec3(0.f, 0.f, 45.f));
+    ModelObject* moon = new ModelObject("Assets/moon.obj", moonTexture, glm::vec3(0.f, 50.f, 4.f), glm::vec3(1.5f), glm::vec3(0.f, 180.f, -45.f));
 
     cycleManager.SetSun(sun);
     cycleManager.SetMoon(moon);
@@ -54,11 +54,11 @@ void Game::Start ( )
     dayNightGradient = Textures("Assets/Textures/dayNight.png");
 
     std::vector<ModelObject*> randomSpawnedObjs = spawner.SpawnObjects(
-        "Assets/Obj/Flower.obj",
+        "Assets/Flower.obj",
         flowerTexture,
-        "Assets/Obj/Flag.obj",
+        "Assets/Flag.obj",
         flagTexture,
-        "Assets/Obj/Mushroom.obj",
+        "Assets/Mushroom.obj",
         mushroomTexture
     );
 
