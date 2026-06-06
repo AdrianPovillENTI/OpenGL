@@ -1,39 +1,43 @@
 #include "Camera.h"
-#include <glm.hpp>
-#include <algorithm>
+#include "../Managers/GLManager.h"
 
-// Constructor con valores por defecto
+#include <cmath>
+
 Camera::Camera ( )
 {
-    position = glm::vec3 ( 0.0f , 4.0f , 8.0f );
-    up = glm::vec3 ( 0.0f , 1.0f , 0.0f );
+    // Posición inicial
+    position = glm::vec3 ( 0.0f , 2.0f , 4.5f );
 
+    // Dirección inicial
+    front = glm::vec3 ( 0.0f , 0.0f , -1.0f );
+
+    // Up global
+    worldUp = glm::vec3 ( 0.0f , 1.0f , 0.0f );
+
+    // Rotación inicial estilo FPS
+    yaw = -90.0f;
+    pitch = 0.0f;
+
+    // Configuración del ratón
+    mouseSensitivity = 0.05f;
+    firstMouse = true;
+    lastMousePosition = glm::vec2 ( WIDTH / 2.0f , HEIGHT / 2.0f );
+
+    // Movimiento
+    movementSpeed = 5.0f;
+
+    // Proyección
     fov = 45.0f;
     aspectRatio = 16.0f / 9.0f;
     nearPlane = 0.1f;
     farPlane = 100.0f;
 
-    orbitAngle = 0.0f;
-    orbitRadius = 8.0f;
-    orbitHeight = 4.0f;
-    orbitSpeed = 1.0f;
-    orbitCenter = glm::vec3 ( 0.0f );
-
-    //mode = CameraMode::Orbit;
-
-    dollyTimer = 0.0f;
-    dollyDuration = 2.0f;
-    dollyStartPos = glm::vec3 ( 0.0f );
-    dollyEndPos = glm::vec3 ( 0.0f );
-    dollyStartFov = 45.0f;
-    dollyEndFov = 70.0f;
-    dollyTarget = glm::vec3 ( 0.0f );
+    UpdateCameraVectors ( );
 }
 
 glm::mat4 Camera::GetViewMatrix ( ) const
 {
-    //Posicion camara, target lockeado, direccion
-    return glm::lookAt(position, position + glm::vec3(0,0,5), up);
+    return glm::lookAt ( position , position + front , up );
 }
 
 glm::mat4 Camera::GetProjectionMatrix ( ) const
@@ -41,9 +45,96 @@ glm::mat4 Camera::GetProjectionMatrix ( ) const
     return glm::perspective ( glm::radians ( fov ) , aspectRatio , nearPlane , farPlane );
 }
 
-void Camera::SetAspectRatio ( float aspect )
+void Camera::Update ( float dt )
 {
-    aspectRatio = aspect;
+    UpdateMouseLook ( dt );
+}
+
+void Camera::UpdateMouseLook ( float dt )
+{
+    glm::vec2 mousePosition = GLManager::Instance ( ).GetMousePosition ( );
+
+    glm::vec2 screenCenter = glm::vec2 ( WIDTH / 2.0f , HEIGHT / 2.0f );
+
+    // Vector desde el centro de la pantalla hasta el ratón
+    glm::vec2 mouseDirection = mousePosition - screenCenter;
+
+    // Zona muerta para que no rote si el ratón está casi en el centro
+    float deadZone = 75.0f;
+
+    if ( glm::length ( mouseDirection ) < deadZone )
+    {
+        return;
+    }
+
+    // Convertimos la posición del ratón a un valor entre -1 y 1 aproximadamente
+    float normalizedX = mouseDirection.x / ( WIDTH / 2.0f );
+    float normalizedY = mouseDirection.y / ( HEIGHT / 2.0f );
+
+    // Velocidad de rotación en grados por segundo
+    float rotationSpeed = 60.0f;
+
+    yaw += normalizedX * rotationSpeed * dt;
+    pitch -= normalizedY * rotationSpeed * dt;
+
+    // Limitamos el pitch para evitar que la cámara dé la vuelta
+    if ( pitch > 89.0f )
+    {
+        pitch = 89.0f;
+    }
+
+    if ( pitch < -89.0f )
+    {
+        pitch = -89.0f;
+    }
+
+    UpdateCameraVectors ( );
+}
+void Camera::UpdateCameraVectors ( )
+{
+    glm::vec3 direction;
+
+    direction.x = cos ( glm::radians ( yaw ) ) * cos ( glm::radians ( pitch ) );
+    direction.y = sin ( glm::radians ( pitch ) );
+    direction.z = sin ( glm::radians ( yaw ) ) * cos ( glm::radians ( pitch ) );
+
+    front = glm::normalize ( direction );
+
+    right = glm::normalize ( glm::cross ( front , worldUp ) );
+    up = glm::normalize ( glm::cross ( right , front ) );
+}
+
+void Camera::MoveForward ( float dt )
+{
+    //Restringimos la Y para que no se mueva hacia arriba o abajo al mirar hacia arriba o abajo
+    glm::vec3 moveDirection = glm::vec3 ( front.x , 0.0f , front.z );
+
+    if ( glm::length ( moveDirection ) > 0.0001f )
+    {
+        moveDirection = glm::normalize ( moveDirection );
+        position += moveDirection * movementSpeed * dt;
+    }
+}
+void Camera::MoveBackward ( float dt )
+{
+
+    glm::vec3 moveDirection = glm::vec3 ( front.x , 0.0f , front.z );
+
+    if ( glm::length ( moveDirection ) > 0.0001f )
+    {
+        moveDirection = glm::normalize ( moveDirection );
+        position -= moveDirection * movementSpeed * dt;
+    }
+}
+
+void Camera::MoveRight ( float dt )
+{
+    position += right * movementSpeed * dt;
+}
+
+void Camera::MoveLeft ( float dt )
+{
+    position -= right * movementSpeed * dt;
 }
 
 void Camera::SetPosition ( const glm::vec3 & newPosition )
@@ -51,9 +142,9 @@ void Camera::SetPosition ( const glm::vec3 & newPosition )
     position = newPosition;
 }
 
-void Camera::SetTarget ( const glm::vec3 & newTarget )
+void Camera::SetAspectRatio ( float newAspectRatio )
 {
-    //target = newTarget;
+    aspectRatio = newAspectRatio;
 }
 
 void Camera::SetFOV ( float newFov )
@@ -61,133 +152,37 @@ void Camera::SetFOV ( float newFov )
     fov = newFov;
 }
 
+void Camera::SetMovementSpeed ( float newSpeed )
+{
+    movementSpeed = newSpeed;
+}
+
+void Camera::SetMouseSensitivity ( float newSensitivity )
+{
+    mouseSensitivity = newSensitivity;
+}
+
 glm::vec3 Camera::GetPosition ( ) const
 {
     return position;
 }
 
+glm::vec3 Camera::GetFront ( ) const
+{
+    return front;
+}
+
+glm::vec3 Camera::GetRight ( ) const
+{
+    return right;
+}
+
+glm::vec3 Camera::GetUp ( ) const
+{
+    return up;
+}
 
 float Camera::GetFOV ( ) const
 {
     return fov;
-}
-
-CameraMode Camera::GetMode ( ) const
-{
-    return mode;
-}
-
-void Camera::SetOrbitCenter ( const glm::vec3 & center )
-{
-    orbitCenter = center;
-}
-
-void Camera::SetOrbitRadius ( float radius )
-{
-    orbitRadius = radius;
-}
-
-void Camera::SetOrbitHeight ( float height )
-{
-    orbitHeight = height;
-}
-
-void Camera::SetOrbitSpeed ( float speed )
-{
-    orbitSpeed = speed;
-}
-
-void Camera::ActivateOrbit ( )
-{
-    mode = CameraMode::Orbit;
-}
-
-void Camera::ActivateWideShot ( const glm::vec3 & subjectPosition )
-{
-    // Plano general
-    mode = CameraMode::WideShot;
-
-    position = glm::vec3(0, 2, 4.5f);
-
-    fov = 45.0f;
-}
-void Camera::MoveCameraForward(const glm::vec3& subjectPosition)
-{
-    position = subjectPosition;
-}
-void Camera::ActivateDetailShot ( const glm::vec3 & subjectPosition )
-{
-    // Plano detalle
-    mode = CameraMode::DetailShot;
-
-    position = glm::vec3 ( 0 , 2 , 4.5f );
-
-    fov = 25.0f;
-}
-
-void Camera::ActivateDollyZoom ( const glm::vec3 & subjectPosition )
-{
-    mode = CameraMode::DollyZoom;
-
-    dollyTarget = subjectPosition + glm::vec3 ( 0.0f , 1.2f , 0.0f );
-
-    dollyStartPos = dollyTarget + glm::vec3 ( 0.0f , 1.0f , 6.0f );
-    dollyEndPos = dollyTarget + glm::vec3 ( 0.0f , 1.0f , 2.0f );
-
-    dollyStartFov = 25.0f;
-    dollyEndFov = 70.0f;
-
-    dollyTimer = 0.0f;
-
-    position = dollyStartPos;
-    fov = dollyStartFov;
-}
-
-void Camera::Update ( float dt )
-{
-    switch ( mode )
-    {
-        case CameraMode::Orbit:
-            UpdateOrbit ( dt );
-            break;
-
-        case CameraMode::WideShot:
-            // Plano fijo: no hace nada por frame
-            break;
-
-        case CameraMode::DetailShot:
-            // Plano fijo: no hace nada por frame
-            break;
-
-        case CameraMode::DollyZoom:
-            UpdateDollyZoom ( dt );
-            break;
-    }
-}
-
-void Camera::UpdateOrbit ( float dt )
-{
-    orbitAngle += dt * orbitSpeed;
-
-    position.x = orbitCenter.x + cos ( orbitAngle ) * orbitRadius;
-    position.z = orbitCenter.z + sin ( orbitAngle ) * orbitRadius;
-    position.y = orbitCenter.y + orbitHeight;
-
-}
-
-void Camera::UpdateDollyZoom ( float dt )
-{
-    dollyTimer += dt;
-
-    float t = dollyTimer / dollyDuration;
-    t = t < 0.0f ? 0.0f : t > 1.0 ? 1.0f : t;
-    // Interpolación lineal de posición y FOV
-    position = glm::mix ( dollyStartPos , dollyEndPos , t );
-    fov = glm::mix ( dollyStartFov , dollyEndFov , t );
-
-    // Cuando termina, vuelve a órbita
-    if ( t >= 1.0f )
-    {
-        ActivateOrbit ( );
-    }
 }

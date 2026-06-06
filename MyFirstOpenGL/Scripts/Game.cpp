@@ -27,9 +27,6 @@ void Game::Start ( )
     // Usa el tamaño real de la ventana.
     camera.SetAspectRatio ( WIDTH / HEIGHT );
 
-    // La cámara mirará al centro de la escena al comenzar.
-    camera.SetTarget ( sceneCenter );
-
     controller = new GameController ( );
 
     // Suelo con cubo
@@ -102,8 +99,6 @@ void Game::Update ( float dt )
     TimeManager::Instance ( ).Update ( glfwGetTime ( ) );
 
     // El centro de la órbita será el centro de la escena
-    camera.SetOrbitCenter ( sceneCenter );
-
     for ( int i = 0; i < gameObjects.size ( ); i++ )
     {
         gameObjects [ i ]->Update ( dt );
@@ -119,7 +114,7 @@ void Game::Render ( )
 
     // Activar shader
     shaderPrograms [ 0 ].Use ( );
-
+    
     // Matriz de vista: cámara
     glm::mat4 view = camera.GetViewMatrix ( );
 
