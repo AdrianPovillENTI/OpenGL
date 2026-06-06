@@ -2,8 +2,8 @@
 
 // Coordenadas UV que vienen del vertex shader.
 // Sirven para saber qué punto de la textura corresponde a este fragmento.
-in vec2 TexCoord;
-in vec3 FragNormal;
+in vec2 FragTexCoord;
+in vec3 FragNormals;
 
 // Color final que saldrá a pantalla
 out vec4 FragColor;
@@ -20,12 +20,12 @@ uniform float sunLightIntensity;
 void main()
 {
     // Leemos el color de la textura en las coordenadas UV actuales
-    vec4 texColor = texture(mainTexture, TexCoord);
+    vec4 texColor = texture(mainTexture, FragTexCoord);
     vec3 ambientColor = texture(dayNightTexture, vec2(dayTime, 0.5)).rgb;
 
-    vec3 normal = normalize(FragNormal);
+    vec3 normal = normalize(FragNormals);
     
-    float diffuseAmount = max(dot(normal, -directionalLightDirection), 0.0);
+    float diffuseAmount = max(dot(normal, directionalLightDirection), 0.0);
 
     vec3 ambient = texColor.rgb * ambientColor;
 

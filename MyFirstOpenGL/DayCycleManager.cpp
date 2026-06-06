@@ -16,7 +16,7 @@ void DayCycleManager::Update(float dt)
 
 	// Fórmula donada per ChatGPT amb el prompt: Quina es la fórmula per a que un objecte faci un moviment circular uniforme sobre el pla X Y?
 
-	angle -= rotationSpeed * dt;
+	angle += rotationSpeed * dt;
 
 	angle = std::fmod(angle, glm::two_pi<float>()); 
 
@@ -31,8 +31,8 @@ void DayCycleManager::Update(float dt)
 	y = rotationCenter.y + sin(angle) * radius;
 	z = rotationCenter.z;
 	
-	sun->SetPosition(glm::vec3(x, y, z));
-	moon->SetPosition(glm::vec3(-x, -y, z));
+	sun->SetPosition(glm::vec3(-x, -y, z));
+	moon->SetPosition(glm::vec3(x, y, z));
 
 	sunlightDirection = glm::normalize(rotationCenter - sun->GetTransform().position);
 

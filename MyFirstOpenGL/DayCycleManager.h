@@ -23,7 +23,7 @@ private:
 
 	float angle = glm::radians(90.f);
 	float rotationSpeed;
-	float radius = 10.f;
+	float radius = 30.f;
 	float cycleTime = 20.f; // segons
 	float lightIntensity = 1.f;
 };

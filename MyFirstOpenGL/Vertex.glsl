@@ -7,6 +7,7 @@ layout (location = 0) in vec3 aPos;
 // Coordenadas UV de textura.
 // Debe coincidir con el atributo 1 para cuando hacemos: glVertexAttribPointer(attrib ...)
 layout (location = 1) in vec2 aTexCoord;
+layout (location = 2) in vec3 aNormals;
 
 // Matriz del objeto.
 // Mueve, rota y escala cada objeto en el mundo.
@@ -21,7 +22,8 @@ uniform mat4 view;
 uniform mat4 projection;
 
 // Enviamos las UV al fragment shader para usar texturas después.
-out vec2 TexCoord;
+out vec2 GeometryTexCoord;
+out vec3 GeometryNormals;
 
 void main()
 {
@@ -34,5 +36,6 @@ void main()
     gl_Position = projection * view * model * vec4(aPos, 1.0);
 
     // Pasamos las coordenadas UV al fragment shader
-    TexCoord = aTexCoord;
+    GeometryTexCoord = aTexCoord;
+    GeometryNormals = aNormals;
 }

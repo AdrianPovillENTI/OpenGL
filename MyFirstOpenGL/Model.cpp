@@ -30,6 +30,12 @@ Model::Model ( const std::vector<float> & vertex , const std::vector<float> & uv
         glEnableVertexAttribArray ( 1 );
     }
 
+    glGenBuffers(1, &this->normalsVBO);
+    glBindBuffer(GL_ARRAY_BUFFER, this->normalsVBO);
+    glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(float), normals.data(), GL_STATIC_DRAW);
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray ( 2 );
+
     // Desvincular
     glBindBuffer ( GL_ARRAY_BUFFER , 0 );
     glBindVertexArray ( 0 );

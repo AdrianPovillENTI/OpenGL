@@ -30,17 +30,20 @@ void Game::Start ( )
     controller = new GameController ( );
 
     // Suelo con cubo
-    //Textures trollTexture ( "Assets/Textures/troll.png" );
-    //Textures rockTexture ( "Assets/Textures/rock.png" );
 
     Textures flowerTexture ("Assets/Textures/Flower.png");
     Textures flagTexture ("Assets/Textures/Flag.png");
     Textures mushroomTexture ("Assets/Textures/Mushroom.png");
     Textures sunTexture ("Assets/Textures/sun.png");
     Textures moonTexture ("Assets/Textures/moon.png");
+    Textures terrainTexture ("Assets/Textures/Terrain.png");
 
-    ModelObject* sun = new ModelObject("Assets/Obj/sun.obj", sunTexture, glm::vec3(0.f, 10.f, 4.f));
-    ModelObject* moon = new ModelObject("Assets/Obj/moon.obj", moonTexture, glm::vec3(0.f, -10.f, 4.f));
+    ModelObject* terrain = new ModelObject("Assets/Obj/Terrain.obj", terrainTexture, glm::vec3(0.f, -0.5f, 0.f));
+
+    gameObjects.push_back(terrain);
+
+    ModelObject* sun = new ModelObject("Assets/Obj/sun.obj", sunTexture, glm::vec3(0.f, -60.f, 4.f));
+    ModelObject* moon = new ModelObject("Assets/Obj/moon.obj", moonTexture, glm::vec3(0.f, 60.f, 4.f));
 
     cycleManager.SetSun(sun);
     cycleManager.SetMoon(moon);
@@ -59,65 +62,10 @@ void Game::Start ( )
         mushroomTexture
     );
 
-    Cube * ground = new Cube ( glm::vec3 ( 0.0f ,0.4f , 0.0f ) );
-    ground->GetTransform().scale = glm::vec3 ( 25.0f , 0.4f , 25.0f );
-    gameObjects.push_back ( ground );
-
     for (int i = 0; i < randomSpawnedObjs.size(); i++)
     {
         gameObjects.push_back(randomSpawnedObjs[i]);
     }
-
-    //ModelObject * trollLeft = new ModelObject (
-    //    "Assets/troll.obj" ,
-    //    trollTexture ,
-    //    glm::vec3 ( -2.5f , 0.0f , 0.0f ) ,
-    //    glm::vec3 ( 1.0f ) ,
-    //    glm::vec3 ( 0.0f ) ,
-    //    glm::vec3 ( 0.8f , 1.0f , 0.8f )
-    //);
-
-    //ModelObject * trollCenter = new ModelObject (
-    //    "Assets/troll.obj" ,
-    //    trollTexture ,
-    //    glm::vec3 ( 0.0f , 0.0f , 0.0f ) ,
-    //    glm::vec3 ( 1.0f ) ,
-    //    glm::vec3 ( 0.0f ) ,
-    //    glm::vec3 ( 1.0f , 1.0f , 1.0f )
-    //);
-
-    //ModelObject * trollRight = new ModelObject (
-    //    "Assets/troll.obj" ,
-    //    trollTexture ,
-    //    glm::vec3 ( 2.5f , 0.0f , 0.0f ) ,
-    //    glm::vec3 ( 1.0f ) ,
-    //    glm::vec3 ( 0.0f ) ,
-    //    glm::vec3 ( 0.3f , 0.2f , 1.0f )
-    //);
-
-    //ModelObject * rock = new ModelObject (
-    //    "Assets/rock.obj" ,
-    //    rockTexture ,
-    //    glm::vec3 ( 3.5f , 0.0f , 2.5f ) ,
-    //    glm::vec3 ( 1.0f ) ,
-    //    glm::vec3 ( 0.0f ) ,
-    //    glm::vec3 ( 1.0f , 1.0f , 1.0f )
-    //);
-
-    //ModelObject * cloud = new ModelObject (
-    //    "Assets/rock.obj" ,
-    //    rockTexture ,
-    //    glm::vec3 ( 0.0f , 3.0f , -2.0f ) ,
-    //    glm::vec3 ( 2.5f , 0.8f , 1.5f ) ,
-    //    glm::vec3 ( 0.0f ) ,
-    //    glm::vec3 ( 1.2f , 1.2f , 1.2f )
-    //);
-
-    //gameObjects.push_back ( trollLeft );
-    //gameObjects.push_back ( trollCenter );
-    //gameObjects.push_back ( trollRight );
-    //gameObjects.push_back ( rock );
-    //gameObjects.push_back ( cloud );
     
     // Inicializar input
     InputManager::Instance ( ).Init ( GLManager::Instance ( ).GetWindow ( ) );
@@ -168,7 +116,7 @@ void Game::Render ( )
 
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, dayNightGradient.GetID());
-    glUniform1i(glGetUniformLocation(shaderPrograms[0].GetID(), "dayNightTexture"), 0);
+    glUniform1i(glGetUniformLocation(shaderPrograms[0].GetID(), "dayNightTexture"), 1);
 
     // Dibujar objetos
     for ( int i = 0; i < gameObjects.size ( ); i++ )

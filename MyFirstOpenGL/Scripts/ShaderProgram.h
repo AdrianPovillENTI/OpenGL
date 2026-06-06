@@ -2,6 +2,7 @@
 #include <GL/glew.h>
 
 #define VERTEX "Vertex.glsl"
+#define GEOMETRY "MyFirstGeometryShader.glsl"
 #define FRAGMENT "Fragment.glsl"
 
 class ShaderProgram
@@ -9,6 +10,7 @@ class ShaderProgram
 private:
     GLuint programID = 0;
     GLuint vertexShader = 0;
+    GLuint geometryShader = 0;
     GLuint fragmentShader = 0;
 
 public:
