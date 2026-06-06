@@ -10,8 +10,7 @@ class InstancesSpawner {
 
 public: 
 	InstancesSpawner() = default;
-
-	void SpawnObjects(std::string type_1, Textures type_1_tex, std::string type_2, Textures type_2_tex, std::string type_3, Textures type_3_tex);
+	std::vector<ModelObject*> SpawnObjects(std::string type_1, Textures type_1_tex, std::string type_2, Textures type_2_tex, std::string type_3, Textures type_3_tex);
 
 private: 
 

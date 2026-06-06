@@ -7,6 +7,9 @@
 #include "../Model.h"
 #include <string>
 #include "Camera.h"
+#include "../InstancesSpawner.h"
+#include "../DayCycleManager.h"
+
 class Game
 {
 private:
@@ -15,6 +18,10 @@ private:
     Camera camera;
     glm::vec3 sceneCenter = glm::vec3 ( 0.0f , 0.0f , 0.0f );
     GameController* controller;
+    InstancesSpawner spawner;
+    Textures dayNightGradient;
+    DayCycleManager cycleManager;
+
 
 public:
     Game ( );

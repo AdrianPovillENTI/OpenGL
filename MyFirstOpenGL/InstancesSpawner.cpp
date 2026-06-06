@@ -1,7 +1,9 @@
 #include "InstancesSpawner.h"
 
-void InstancesSpawner::SpawnObjects(std::string type_1, Textures type_1_tex, std::string type_2, Textures type_2_tex, std::string type_3, Textures type_3_tex)
+std::vector<ModelObject*> InstancesSpawner::SpawnObjects(std::string type_1, Textures type_1_tex, std::string type_2, Textures type_2_tex, std::string type_3, Textures type_3_tex)
 {
+	std::vector<ModelObject*> objects;
+
 	for (int i = 0; i < spawnPoints.size(); i++)
 	{
 		int random = rand() % 4;
@@ -9,18 +11,20 @@ void InstancesSpawner::SpawnObjects(std::string type_1, Textures type_1_tex, std
 		switch (random)
 		{
 		case (0):
-			SpawnObject(type_1, type_1_tex, i);
+			objects.push_back(SpawnObject(type_1, type_1_tex, i));
 			break;
 		case (1):
-			SpawnObject(type_2, type_2_tex, i);
+			objects.push_back(SpawnObject(type_2, type_2_tex, i));
 			break;
 		case(2):
-			SpawnObject(type_3, type_3_tex, i);
+			objects.push_back(SpawnObject(type_3, type_3_tex, i));
 			break;
 		default:
 			break;
 		}
 	}
+
+	return objects;
 }
 
 ModelObject* InstancesSpawner::SpawnObject(std::string type, Textures tex, int index)

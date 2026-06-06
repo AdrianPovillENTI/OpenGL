@@ -23,6 +23,7 @@ public:
     virtual void Draw(GLuint program);
 
     Transform & GetTransform ( );
+    void SetPosition(glm::vec3 _pos);
     bool IsActive ( ) const;
     void SetActive ( bool state );
 

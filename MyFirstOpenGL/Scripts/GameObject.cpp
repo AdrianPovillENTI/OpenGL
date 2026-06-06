@@ -15,6 +15,11 @@ Transform & GameObject::GetTransform ( )
     return transform;
 }
 
+void GameObject::SetPosition(glm::vec3 _pos)
+{
+    transform.position = _pos;
+}
+
 bool GameObject::IsActive ( ) const
 {
     return active;

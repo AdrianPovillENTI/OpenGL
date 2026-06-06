@@ -1,25 +1,37 @@
 #version 330 core
-//ESTE CODIGO SE HA HECHO CON LA AYUDA DE CHATGPT
+
 // Coordenadas UV que vienen del vertex shader.
 // Sirven para saber qué punto de la textura corresponde a este fragmento.
 in vec2 TexCoord;
+in vec3 FragNormal;
 
 // Color final que saldrá a pantalla
 out vec4 FragColor;
 
 // Textura principal del modelo.
-// Aquí conectaremos troll.png o rock.png desde C++.
 uniform sampler2D mainTexture;
+uniform sampler2D dayNightTexture;
 
-// Color multiplicador para pintar el modelo.
-uniform vec3 tintColor;
+uniform float dayTime;
+
+uniform vec3 directionalLightDirection;
+uniform float sunlightIntensity;
 
 void main()
 {
     // Leemos el color de la textura en las coordenadas UV actuales
     vec4 texColor = texture(mainTexture, TexCoord);
+    vec3 ambientColor = texture(dayNightTexture, vec2(dayTime, 0.5)).rgb;
 
-    // Multiplicamos el color de la textura por el tinte.
-    // Esto permite reutilizar la misma textura cambiando ligeramente el color.
-    FragColor = texColor * vec4(tintColor, 1.0);
+    vec3 normal = normalize(FragNormal);
+    
+    float diffuseAmount = max(dot(normal, -directionalLightDirection), 0.0);
+
+    vec3 ambient = texColor.rgb * ambientColor;
+
+    vec3 diffuse = texColor.rgb * diffuseAmount * sunlightIntensity;
+
+    vec3 finalColor = ambient + diffuse;
+
+    FragColor = finalColor * vec4(finalColor, 1.0);
 }
