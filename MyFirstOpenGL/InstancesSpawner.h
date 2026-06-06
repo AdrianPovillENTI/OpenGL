@@ -16,21 +16,21 @@ private:
 
 	std::vector<glm::vec3> spawnPoints =
 	{
-		glm::vec3(100.f, 100.f, 0.f),
-		glm::vec3(150.f, 100.f, 0.f),
-		glm::vec3(200.f, 100.f, 0.f),
+		glm::vec3(1.f, 0.f, 1.f),
+		glm::vec3(-1.f, 0.f, 1.f),
+		glm::vec3(0.f, 0.f, 1.f),
 
-		glm::vec3(120.f, 150.f, 0.f),
-		glm::vec3(170.f, 150.f, 0.f),
-		glm::vec3(220.f, 150.f, 0.f),
+		glm::vec3(1.f, 0.f, 0.f),
+		glm::vec3(-1.f, 0.f, 0.f),
+		glm::vec3(0.f, 0.f, 0.f),
 
-		glm::vec3(-100.f, -100.f, 0.f),
-		glm::vec3(-150.f, -100.f, 0.f),
-		glm::vec3(-200.f, -100.f, 0.f),
+		glm::vec3(-1.f, 0.f, -1.f),
+		glm::vec3(1.f, 0.f, -1.f),
+		glm::vec3(0.f, 0.f, -1.f),
 
-		glm::vec3(-120.f, -100.f, 0.f),
-		glm::vec3(-170.f, -100.f, 0.f),
-		glm::vec3(-220.f, -100.f, 0.f),
+		glm::vec3(-2.f, 0.f, 2.f),
+		glm::vec3(-2.f, 0.f, -2.f),
+		glm::vec3(2.f, 0.f, 0.f),
 	};
 
 	ModelObject* SpawnObject(std::string type, Textures tex, int index);

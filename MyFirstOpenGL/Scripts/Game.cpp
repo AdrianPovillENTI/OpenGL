@@ -42,8 +42,8 @@ void Game::Start ( )
     Textures sunTexture ("Assets/Textures/sun.png");
     Textures moonTexture ("Assets/Textures/moon.png");
 
-    ModelObject* sun = new ModelObject("Assets/Obj/sun.obj", sunTexture, glm::vec3(0.f, 500.f, 500.f));
-    ModelObject* moon = new ModelObject("Assets/Obj/moon.obj", moonTexture, glm::vec3(0.f, -500.f, 500.f));
+    ModelObject* sun = new ModelObject("Assets/Obj/sun.obj", sunTexture, glm::vec3(0.f, 10.f, 4.f));
+    ModelObject* moon = new ModelObject("Assets/Obj/moon.obj", moonTexture, glm::vec3(0.f, -10.f, 4.f));
 
     cycleManager.SetSun(sun);
     cycleManager.SetMoon(moon);
@@ -62,8 +62,9 @@ void Game::Start ( )
         mushroomTexture
     );
 
-    Cube * ground = new Cube ( glm::vec3 ( 0.0f ,-0.4f , 0.0f ) );
+    Cube * ground = new Cube ( glm::vec3 ( 0.0f ,0.4f , 0.0f ) );
     ground->GetTransform().scale = glm::vec3 ( 25.0f , 0.4f , 25.0f );
+    gameObjects.push_back ( ground );
 
     for (int i = 0; i < randomSpawnedObjs.size(); i++)
     {
@@ -118,7 +119,6 @@ void Game::Start ( )
     //gameObjects.push_back ( trollLeft );
     //gameObjects.push_back ( trollCenter );
     //gameObjects.push_back ( trollRight );
-    //gameObjects.push_back ( ground );
     //gameObjects.push_back ( rock );
     //gameObjects.push_back ( cloud );
     
@@ -167,6 +167,14 @@ void Game::Render ( )
     GLint projectionLoc = glGetUniformLocation ( shaderPrograms [ 0 ].GetID ( ) , "projection" );
     glUniformMatrix4fv ( projectionLoc , 1 , GL_FALSE , glm::value_ptr ( projection ) );
 
+    glUniform3fv(glGetUniformLocation(shaderPrograms[0].GetID(), "directionalLightDirection"), 1, glm::value_ptr(cycleManager.GetSunlighDirection()));
+    glUniform1f(glGetUniformLocation(shaderPrograms[0].GetID(), "sunLightIntensity"), cycleManager.GetLightIntensity());
+    glUniform1f(glGetUniformLocation(shaderPrograms[0].GetID(), "dayTime"), cycleManager.GetDayTime());
+
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, dayNightGradient.GetID());
+    glUniform1i(glGetUniformLocation(shaderPrograms[0].GetID(), "dayNightTexture"), 0);
+
     // Dibujar objetos
     for ( int i = 0; i < gameObjects.size ( ); i++ )
     {
@@ -184,9 +192,6 @@ void Game::Render ( )
             std::cout << "Objeto " << i << " no está activo" << std::endl;
             continue;
         }
-        glUniform3fv(glGetUniformLocation(shaderPrograms[0].GetID(), "directionalLightDirection"), 1, glm::value_ptr(cycleManager.GetSunlighDirection()));
-        glUniform1f(glGetUniformLocation(shaderPrograms[0].GetID(), "sunLightIntensity"), cycleManager.GetLightIntensity());
-        glUniform1f(glGetUniformLocation(shaderPrograms[0].GetID(), "dayTime"), cycleManager.GetDayTime());
 
         obj->Draw ( shaderPrograms [ 0 ].GetID ( ) );
     }

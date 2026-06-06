@@ -11,6 +11,7 @@ DayCycleManager::DayCycleManager()
 
 void DayCycleManager::Update(float dt)
 {
+
 	dayTime = std::fmod(dayTime + dt * 0.05f, 1.0f); // Així el valor serà de 0 a < 1 i durarà 20s
 
 	// Fórmula donada per ChatGPT amb el prompt: Quina es la fórmula per a que un objecte faci un moviment circular uniforme sobre el pla X Y?

@@ -29,25 +29,20 @@ std::vector<ModelObject*> InstancesSpawner::SpawnObjects(std::string type_1, Tex
 
 ModelObject* InstancesSpawner::SpawnObject(std::string type, Textures tex, int index)
 {
-	
-	ModelObject* obj = new ModelObject(type, tex, spawnPoints[index], RandomScale(), RandomRotation());
-	return obj;
+	return new ModelObject(type, tex, spawnPoints[index], RandomScale(), RandomRotation());
 }
 
 glm::vec3 InstancesSpawner::RandomRotation()
 {
-	glm::vec3 rot = glm::vec3(0.f, 0.f, rand() % 360);
+	glm::vec3 rot = glm::vec3(0.f, rand() % 360, 0.f);
 	return rot;
 }
 
 glm::vec3 InstancesSpawner::RandomScale()
 {
-	float x, y, z;
 
-	x = 0.5f + ((float)rand() / RAND_MAX) * (1.5f - 0.5f); // retorna un valor entre 0.5 i 1.5
-	y = 0.5f + ((float)rand() / RAND_MAX) * (1.5f - 0.5f); // retorna un valor entre 0.5 i 1.5
-	z = 0.5f + ((float)rand() / RAND_MAX) * (1.5f - 0.5f); // retorna un valor entre 0.5 i 1.5
+	float _scale = 0.8f + ((float)rand() / RAND_MAX) * (1.1f - 0.8f);
 
-	glm::vec3 scale = glm::vec3(x, y, z);
+	glm::vec3 scale = glm::vec3(_scale, _scale, _scale);
 	return scale;
 }

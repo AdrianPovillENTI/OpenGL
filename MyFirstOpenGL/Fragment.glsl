@@ -15,7 +15,7 @@ uniform sampler2D dayNightTexture;
 uniform float dayTime;
 
 uniform vec3 directionalLightDirection;
-uniform float sunlightIntensity;
+uniform float sunLightIntensity;
 
 void main()
 {
@@ -29,9 +29,9 @@ void main()
 
     vec3 ambient = texColor.rgb * ambientColor;
 
-    vec3 diffuse = texColor.rgb * diffuseAmount * sunlightIntensity;
+    vec3 diffuse = texColor.rgb * diffuseAmount * sunLightIntensity;
 
     vec3 finalColor = ambient + diffuse;
 
-    FragColor = finalColor * vec4(finalColor, 1.0);
+    FragColor = vec4(finalColor, 1.0);
 }
