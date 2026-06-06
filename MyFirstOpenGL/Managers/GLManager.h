@@ -5,6 +5,7 @@
 
 #define WIDTH 800
 #define HEIGHT 600
+#define SCREEN_CENTER glm::vec2 ( WIDTH / 2.0f , HEIGHT / 2.0f )
 
 class GLManager
 {

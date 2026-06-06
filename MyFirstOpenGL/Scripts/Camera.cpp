@@ -54,10 +54,8 @@ void Camera::UpdateMouseLook ( float dt )
 {
     glm::vec2 mousePosition = GLManager::Instance ( ).GetMousePosition ( );
 
-    glm::vec2 screenCenter = glm::vec2 ( WIDTH / 2.0f , HEIGHT / 2.0f );
-
     // Vector desde el centro de la pantalla hasta el ratón
-    glm::vec2 mouseDirection = mousePosition - screenCenter;
+    glm::vec2 mouseDirection = mousePosition - SCREEN_CENTER;
 
     // Zona muerta para que no rote si el ratón está casi en el centro
     float deadZone = 75.0f;
@@ -67,12 +65,12 @@ void Camera::UpdateMouseLook ( float dt )
         return;
     }
 
-    // Convertimos la posición del ratón a un valor entre -1 y 1 aproximadamente
+    //Normalizamos la direccion
     float normalizedX = mouseDirection.x / ( WIDTH / 2.0f );
     float normalizedY = mouseDirection.y / ( HEIGHT / 2.0f );
 
     // Velocidad de rotación en grados por segundo
-    float rotationSpeed = 60.0f;
+    float rotationSpeed = 80.0f;
 
     yaw += normalizedX * rotationSpeed * dt;
     pitch -= normalizedY * rotationSpeed * dt;
