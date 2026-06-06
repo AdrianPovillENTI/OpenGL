@@ -3,56 +3,45 @@
 #include <glm.hpp>
 #include <gtc/matrix_transform.hpp>
 
-// Modos de cámara que usaremos en la práctica
-enum class CameraMode
-{
-    Orbit ,          // cámara orbitando la escena
-    WideShot ,       // plano general al troll izquierdo
-    DetailShot ,     // plano detalle al troll derecho
-    DollyZoom       // dolly zoom al troll central
-};
-
 class Camera
 {
 private:
-    // Posición actual de la cámara
+    // Posición de la cámara en el mundo
     glm::vec3 position;
 
-    // Punto al que mira
-    glm::vec3 target;
+    // Dirección hacia donde mira la cámara
+    glm::vec3 front;
 
-    // Vector up
+    // Vector hacia arriba global
+    glm::vec3 worldUp;
+
+    // Vector hacia arriba real de la cámara
     glm::vec3 up;
 
-    // Campo de visión
-    float fov;
+    // Vector derecha de la cámara
+    glm::vec3 right;
+
+    // Rotación horizontal
+    float yaw;
+
+    // Rotación vertical
+    float pitch;
+
+    // Sensibilidad del ratón
+    float mouseSensitivity;
+
+    // Velocidad de movimiento
+    float movementSpeed;
+
+    // Para evitar salto brusco al iniciar el ratón
+    bool firstMouse;
+    glm::vec2 lastMousePosition;
 
     // Proyección
+    float fov;
     float aspectRatio;
     float nearPlane;
     float farPlane;
-
-    // Datos de órbita
-    float orbitAngle;
-    float orbitRadius;
-    float orbitHeight;
-    float orbitSpeed;
-    glm::vec3 orbitCenter;
-
-    // Datos del modo actual
-    CameraMode mode;
-
-    // Datos para dolly zoom
-    float dollyTimer;
-    float dollyDuration;
-
-    glm::vec3 dollyStartPos;
-    glm::vec3 dollyEndPos;
-
-    float dollyStartFov;
-    float dollyEndFov;
-
-    glm::vec3 dollyTarget;
 
 public:
     Camera ( );
@@ -61,35 +50,33 @@ public:
     glm::mat4 GetViewMatrix ( ) const;
     glm::mat4 GetProjectionMatrix ( ) const;
 
-    // Setters generales
-    void SetAspectRatio ( float aspect );
+    // Update
+    void Update ( float dt );
+
+    // Movimiento
+    void MoveForward ( float dt );
+    void MoveBackward ( float dt );
+    void MoveRight ( float dt );
+    void MoveLeft ( float dt );
+
+    // Ratón
+    void UpdateMouseLook ( float dt);
+
+    // Setters
     void SetPosition ( const glm::vec3 & newPosition );
-    void SetTarget ( const glm::vec3 & newTarget );
+    void SetAspectRatio ( float newAspectRatio );
     void SetFOV ( float newFov );
+    void SetMovementSpeed ( float newSpeed );
+    void SetMouseSensitivity ( float newSensitivity );
 
     // Getters
     glm::vec3 GetPosition ( ) const;
-    glm::vec3 GetTarget ( ) const;
+    glm::vec3 GetFront ( ) const;
+    glm::vec3 GetRight ( ) const;
+    glm::vec3 GetUp ( ) const;
     float GetFOV ( ) const;
-    CameraMode GetMode ( ) const;
-
-    // Configuración de la órbita
-    void SetOrbitCenter ( const glm::vec3 & center );
-    void SetOrbitRadius ( float radius );
-    void SetOrbitHeight ( float height );
-    void SetOrbitSpeed ( float speed );
-
-    // Activación de modos
-    void ActivateOrbit ( );
-    void ActivateWideShot ( const glm::vec3 & subjectPosition );
-    void ActivateDetailShot ( const glm::vec3 & subjectPosition );
-    void ActivateDollyZoom ( const glm::vec3 & subjectPosition );
-
-    // Update general de cámara
-    void Update ( float dt );
 
 private:
-    // Helpers internos
-    void UpdateOrbit ( float dt );
-    void UpdateDollyZoom ( float dt );
+    // Actualiza los vectores de la camara
+    void UpdateCameraVectors ( );
 };

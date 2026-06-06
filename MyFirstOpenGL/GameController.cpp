@@ -1,5 +1,5 @@
 #include "GameController.h"
-
+#include <iostream>
 void GameController::ManageInputs ( std::vector<GameObject *> & gameObjects , Camera & camera , float dt )
 {
     TimeManageInput ( );
@@ -25,39 +25,29 @@ void GameController::ToggleWireframe ( )
     if ( InputManager::Instance ( ).GetKeyState ( GLFW_KEY_F1 ) == KEY_DOWN )
         GLManager::Instance ( ).EnableWireframe ( );
 }
-
+glm::vec3 curPos;
 void GameController::CameraManageInput ( std::vector<GameObject *> & gameObjects , Camera & camera )
 {
-    // 0 = trollLeft
-    // 1 = trollCenter
-    // 2 = trollRight
-    if ( gameObjects.size ( ) < 3 )
-        return;
+    float dt = TimeManager::Instance ( ).GetDeltaTime ( );
 
-    // Tecla 1 -> plano general => troll izquierdo
-    if ( InputManager::Instance ( ).GetKeyState ( GLFW_KEY_1 ) == KEY_DOWN )
+    if ( InputManager::Instance ( ).GetKeyState ( GLFW_KEY_W ) == KEY_HOLD )
     {
-        glm::vec3 leftPos = gameObjects [ 0 ]->GetTransform ( ).position;
-        camera.ActivateWideShot ( leftPos );
+        camera.MoveForward ( dt );
     }
 
-    // Tecla 2 -> plano detalle => troll derecho
-    if ( InputManager::Instance ( ).GetKeyState ( GLFW_KEY_2 ) == KEY_DOWN )
+    if ( InputManager::Instance ( ).GetKeyState ( GLFW_KEY_S ) == KEY_HOLD )
     {
-        glm::vec3 rightPos = gameObjects [ 2 ]->GetTransform ( ).position;
-        camera.ActivateDetailShot ( rightPos );
+        camera.MoveBackward ( dt );
     }
 
-    // Tecla 3 -> dolly zoom => troll central
-    if ( InputManager::Instance ( ).GetKeyState ( GLFW_KEY_3 ) == KEY_DOWN )
+    if ( InputManager::Instance ( ).GetKeyState ( GLFW_KEY_A ) == KEY_HOLD )
     {
-        glm::vec3 centerPos = gameObjects [ 1 ]->GetTransform ( ).position;
-        camera.ActivateDollyZoom ( centerPos );
+        camera.MoveLeft ( dt );
     }
 
-    // Tecla 0 -> volver Orbita
-    if ( InputManager::Instance ( ).GetKeyState ( GLFW_KEY_0 ) == KEY_DOWN )
+    if ( InputManager::Instance ( ).GetKeyState ( GLFW_KEY_D ) == KEY_HOLD )
     {
-        camera.ActivateOrbit ( );
+        camera.MoveRight ( dt );
     }
+
 }

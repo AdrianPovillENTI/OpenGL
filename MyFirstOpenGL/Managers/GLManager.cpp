@@ -1,4 +1,5 @@
 #include "GLManager.h"
+#include <glm.hpp>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
@@ -17,6 +18,8 @@ GLManager & GLManager::Instance ( )
 
 bool GLManager::Init ( const char * title )
 {
+    glfwSetInputMode ( window , GLFW_CURSOR , GLFW_CURSOR_DISABLED );
+
     if ( !glfwInit ( ) )
     {
         std::cout << "Error al iniciar GLFW\n";
@@ -28,6 +31,8 @@ bool GLManager::Init ( const char * title )
     glfwWindowHint ( GLFW_OPENGL_CORE_PROFILE , GLFW_OPENGL_CORE_PROFILE );
 
     window = glfwCreateWindow ( WIDTH , HEIGHT, title , NULL , NULL );
+
+
     if ( !window )
     {
         std::cout << "Error al crear ventana\n";
@@ -83,4 +88,18 @@ bool GLManager::ShouldClose ( )
 GLFWwindow * GLManager::GetWindow ( )
 {
     return window;
+}
+glm::vec2 GLManager::GetMousePosition()
+{
+    double x;
+    double y;
+
+    //GetMouse position and store in  x & y
+    glfwGetCursorPos(window, &x, &y);
+    if (x < 0) x = 0;
+    else if (x > WIDTH) x = WIDTH;
+    if (y < 0) y = 0;
+    else if (y > HEIGHT) y = HEIGHT;
+
+    return glm::vec2(x,y);
 }
