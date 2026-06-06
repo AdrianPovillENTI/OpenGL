@@ -70,3 +70,43 @@ float DayCycleManager::GetDayTime()
 {
 	return dayTime;
 }
+
+glm::vec3 DayCycleManager::GetSkyColor()
+{
+	if (dayTime < 0.1)
+	{
+		return glm::vec3(0.043f, 0.063f, 0.149f);
+	}
+	else if(dayTime < 0.2)
+	{
+		return glm::vec3(0.361f, 0.294f, 0.541f);
+	}
+	else if (dayTime < 0.3)
+	{
+		return glm::vec3(0.753f, 0.416f, 0.659f);
+	}
+	else if (dayTime < 0.4)
+	{
+		return glm::vec3(0.910f, 0.365f, 0.247f);
+	}
+	else if (dayTime < 0.6)
+	{
+		return glm::vec3(0.431f, 0.776f, 1.000f);
+	}
+	else if (dayTime < 0.7)
+	{
+		return glm::vec3(0.910f, 0.365f, 0.247f);
+	}
+	else if (dayTime < 0.8)
+	{
+		return glm::vec3(0.753f, 0.416f, 0.659f);
+	}
+	else if (dayTime < 0.9)
+	{
+		return glm::vec3(0.361f, 0.294f, 0.541f);
+	}
+	else
+	{
+		return glm::vec3(0.043f, 0.063f, 0.149f);
+	}
+}

@@ -42,8 +42,8 @@ void Game::Start ( )
 
     gameObjects.push_back(terrain);
 
-    ModelObject* sun = new ModelObject("Assets/Obj/sun.obj", sunTexture, glm::vec3(0.f, -60.f, 4.f));
-    ModelObject* moon = new ModelObject("Assets/Obj/moon.obj", moonTexture, glm::vec3(0.f, 60.f, 4.f));
+    ModelObject* sun = new ModelObject("Assets/Obj/sun.obj", sunTexture, glm::vec3(0.f, -50.f, 4.f), glm::vec3(2.f), glm::vec3(0.f, 0.f, 45.f));
+    ModelObject* moon = new ModelObject("Assets/Obj/moon.obj", moonTexture, glm::vec3(0.f, 50.f, 4.f), glm::vec3(1.5f), glm::vec3(0.f, 180.f, -45.f));
 
     cycleManager.SetSun(sun);
     cycleManager.SetMoon(moon);
@@ -90,6 +90,8 @@ void Game::Update ( float dt )
 }
 void Game::Render ( )
 {
+    glm::vec3 skyColor = cycleManager.GetSkyColor();
+    glClearColor(skyColor.x, skyColor.y, skyColor.z, 1.0);
     // Limpiar pantalla y depth buffer
     glClear ( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 

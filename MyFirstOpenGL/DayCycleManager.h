@@ -12,6 +12,7 @@ public:
 	glm::vec3 GetSunlighDirection();
 	float GetLightIntensity();
 	float GetDayTime();
+	glm::vec3 GetSkyColor();
 
 private:
 	
@@ -23,7 +24,7 @@ private:
 
 	float angle = glm::radians(90.f);
 	float rotationSpeed;
-	float radius = 30.f;
+	float radius = 50.f;
 	float cycleTime = 20.f; // segons
 	float lightIntensity = 1.f;
 };
